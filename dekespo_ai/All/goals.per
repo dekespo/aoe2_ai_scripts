@@ -1,0 +1,448 @@
+; Goals for food, search and wood
+	(defrule
+		(true)
+		=>
+		(set-goal GOAL-FOOD-SEARCH COND-NONE)
+		(set-goal GOAL-FOOD-FOUND COND-NONE)
+		(set-goal GOAL-WOOD-FOUND COND-NONE)
+		(set-goal GOAL-ENABLE-TSA COND-NO)
+		(set-goal GOAL-BOAR-FOUND COND-NO)
+		(set-goal GOAL-DEER-FOUND COND-NO)
+		(set-goal GOAL-ENABLE-BOAR-HUNTING COND-NO)
+		(set-goal GOAL-ENABLE-DEER-HUNTING COND-NO)
+		(disable-self)
+	)
+
+	(defrule
+		(goal GOAL-FOOD-FOUND COND-NONE)
+		(current-age == dark-age)
+		;(sheep-and-forage-too-far)
+		(not (resource-found food))
+		;(up-gaia-type-count c: forage-bush == 0)
+		(unit-type-count sheep == 0)
+		(game-time < all-dark-age-search-period-second)
+		=>
+		(set-goal GOAL-FOOD-FOUND COND-NO)
+		(set-goal GOAL-FOOD-SEARCH COND-YES)
+		(chat-local-to-self "No food is available. Searching is enabled!")
+		(disable-self)
+	)
+
+	(defrule
+		(goal GOAL-FOOD-FOUND COND-NONE)
+		(current-age == dark-age)
+		;(up-gaia-type-count c: forage-bush > 0)
+		;(not (sheep-and-forage-too-far))
+		(or
+			(resource-found food)
+			(or
+				(unit-type-count sheep > 0)
+				(game-time >= all-dark-age-search-period-second)
+			)
+		)
+		=>
+		(set-goal GOAL-FOOD-FOUND COND-YES)
+		(set-goal GOAL-FOOD-SEARCH COND-NO)
+		(chat-local-to-self "Food already exists. No need to search for food!")
+		(disable-self)
+	)
+
+	(defrule
+		(goal GOAL-FOOD-SEARCH COND-YES)
+		(current-age == dark-age)
+		(or
+			(resource-found food)
+			(or
+				;(up-gaia-type-count c: forage-bush > 0)
+				(unit-type-count sheep > 0)
+				(game-time >= all-dark-age-search-period-second)
+			)
+		)
+		=>
+		(set-goal GOAL-FOOD-FOUND COND-YES)
+		(set-goal GOAL-FOOD-SEARCH COND-NO)
+		(chat-local-to-self "Food found by search. Stop searching!")
+	)
+
+	(defrule
+		(goal GOAL-BOAR-FOUND COND-NO)
+		(dropsite-min-distance live-boar <= boar-maximum-lure-distance)
+		=>
+		(set-goal GOAL-BOAR-FOUND COND-YES)
+	)
+
+	(defrule
+		(goal GOAL-BOAR-FOUND COND-YES)
+		=>
+		(chat-local-to-self "HUNTING: Boar found!")
+		(disable-self)
+	)
+
+	(defrule
+		(goal GOAL-ENABLE-BOAR-HUNTING COND-NO)
+		;(goal GOAL-ENABLE-DEER-HUNTING COND-NO)
+		(goal GOAL-BOAR-FOUND COND-YES)
+		(strategic-number sn-enable-boar-hunting == 0)
+		(unit-type-count villager > 12)
+		(unit-type-count sheep == 0)
+		;(unit-type-count male-shepherd == 0)
+		;(unit-type-count female-shepherd == 0)
+		(unit-type-count female-forager == 0)
+		(unit-type-count male-forager == 0)
+		;(not (resource-found food))
+		(research-completed ri-loom)
+		=>
+		(set-goal GOAL-ENABLE-BOAR-HUNTING COND-YES)
+	)
+
+	(defrule
+		(goal GOAL-ENABLE-BOAR-HUNTING COND-YES)
+		(or
+			(dropsite-min-distance live-boar > boar-maximum-lure-distance)
+			(building-type-count-total farm > 10)
+		)
+		;(unit-type-count villager-hunter == 0)
+		=>
+		(set-goal GOAL-ENABLE-BOAR-HUNTING COND-NO)
+		(set-goal GOAL-BOAR-FOUND COND-NO)
+		;(disable-self)
+	)
+
+	(defrule
+		(goal GOAL-DEER-FOUND COND-NO)
+		(dropsite-min-distance deer-hunting > deer-max-dropoff-distance)
+		(dropsite-min-distance deer-hunting < deer-max-mill-build-distance)
+		=>
+		(set-goal GOAL-DEER-FOUND COND-YES)
+	)
+
+	(defrule
+		(goal GOAL-DEER-FOUND COND-YES)
+		=>
+		(chat-local-to-self "HUNTING: Deer found!")
+		(disable-self)
+	)
+
+	(defrule
+		(goal GOAL-ENABLE-DEER-HUNTING COND-NO)
+		(goal GOAL-DEER-FOUND COND-YES)
+		(building-type-count-total lumber-camp > 0)
+		(unit-type-count sheep == 0)
+		;(unit-type-count male-shepherd == 0)
+		;(unit-type-count female-shepherd == 0)
+		(unit-type-count female-forager == 0)
+		(unit-type-count male-forager == 0)
+		(building-type-count-total mill < 2)
+		=>
+		(set-goal GOAL-ENABLE-DEER-HUNTING COND-YES)
+	)
+
+	(defrule
+		(goal GOAL-ENABLE-DEER-HUNTING COND-YES)
+		(dropsite-min-distance deer-hunting <= deer-max-dropoff-distance)
+		;(unit-type-count villager-hunter == 0)
+		=>
+		(set-goal GOAL-ENABLE-DEER-HUNTING COND-NO)
+		;(disable-self)
+	)
+
+	(defrule
+		(goal GOAL-WOOD-FOUND COND-NONE)
+		=>
+		(set-goal GOAL-WOOD-FOUND COND-NO)
+		;(chat-local-to-self "Automatically set wood no???")
+		(disable-self)
+	)
+
+	(defrule
+		(goal GOAL-WOOD-FOUND COND-NO)
+		(current-age == dark-age)
+		(resource-found wood)
+		=>
+		(set-goal GOAL-WOOD-FOUND COND-YES)
+	)
+
+; Goals for Blacksmith
+	(defrule
+		(true)
+		=>
+		(set-goal GOAL-BLACKSMITH-CASTLE-SWORD COND-NO)
+		(set-goal GOAL-BLACKSMITH-CASTLE-ARROW COND-NO)
+		(set-goal GOAL-BLACKSMITH-CASTLE-INFANTRY-ARMOR COND-NO)
+		(set-goal GOAL-BLACKSMITH-CASTLE-KNIGHT-ARMOR COND-NO)
+		(set-goal GOAL-BLACKSMITH-CASTLE-ARCHER-ARMOR COND-NO)
+		(set-goal GOAL-BLACKSMITH-IMPERIAL-SWORD COND-NO)
+		(set-goal GOAL-BLACKSMITH-IMPERIAL-ARROW COND-NO)
+		(set-goal GOAL-BLACKSMITH-IMPERIAL-INFANTRY-ARMOR COND-NO)
+		(set-goal GOAL-BLACKSMITH-IMPERIAL-KNIGHT-ARMOR COND-NO)
+		(set-goal GOAL-BLACKSMITH-IMPERIAL-ARCHER-ARMOR COND-NO)
+		(disable-self)
+	)
+
+	(defrule
+		(goal GOAL-BLACKSMITH-CASTLE-SWORD COND-NO)
+		(current-age == castle-age) ; don't forget to put or ; and all unique units needed
+		(or
+			(unit-type-count-total militiaman-line >= BLACKSMITH-CASTLE-MINIMUM-MILITARY-MEN)
+		(or
+			(unit-type-count-total spearman-line >= BLACKSMITH-CASTLE-MINIMUM-MILITARY-MEN)
+		(or
+			(unit-type-count-total eagle-warrior-line >= BLACKSMITH-CASTLE-MINIMUM-MILITARY-MEN)
+		(or
+			(unit-type-count-total scout-cavalry-line >= BLACKSMITH-CASTLE-MINIMUM-MILITARY-MEN)
+		(or
+			(unit-type-count-total knight-line >= BLACKSMITH-CASTLE-MINIMUM-MILITARY-MEN)
+			(unit-type-count-total camel-line >= BLACKSMITH-CASTLE-MINIMUM-MILITARY-MEN)
+		)))))
+		=>
+		(set-goal GOAL-BLACKSMITH-CASTLE-SWORD COND-YES)
+		(chat-local-to-self "GOAL-BLACKSMITH-CASTLE-SWORD is enabled")
+	)
+
+	(defrule
+		(goal GOAL-BLACKSMITH-CASTLE-SWORD COND-YES)
+		(current-age == castle-age) ; don't forget to put or ; and all unique units needed
+		(unit-type-count-total militiaman-line < BLACKSMITH-CASTLE-MINIMUM-MILITARY-MEN)
+		(unit-type-count-total spearman-line < BLACKSMITH-CASTLE-MINIMUM-MILITARY-MEN)
+		(unit-type-count-total eagle-warrior-line < BLACKSMITH-CASTLE-MINIMUM-MILITARY-MEN)
+		(unit-type-count-total scout-cavalry-line < BLACKSMITH-CASTLE-MINIMUM-MILITARY-MEN)
+		(unit-type-count-total knight-line < BLACKSMITH-CASTLE-MINIMUM-MILITARY-MEN)
+		(unit-type-count-total camel-line < BLACKSMITH-CASTLE-MINIMUM-MILITARY-MEN)
+		=>
+		(set-goal GOAL-BLACKSMITH-CASTLE-SWORD COND-NO)
+		(chat-local-to-self "GOAL-BLACKSMITH-CASTLE-SWORD is disabled")
+	)
+
+	(defrule
+		(goal GOAL-BLACKSMITH-IMPERIAL-SWORD COND-NO)
+		(current-age == imperial-age) ; don't forget to put or ; and all unique units needed
+		(or
+			(unit-type-count-total militiaman-line >= BLACKSMITH-IMPERIAL-MINIMUM-MILITARY-MEN)
+		(or
+			(unit-type-count-total spearman-line >= BLACKSMITH-IMPERIAL-MINIMUM-MILITARY-MEN)
+		(or
+			(unit-type-count-total eagle-warrior-line >= BLACKSMITH-IMPERIAL-MINIMUM-MILITARY-MEN)
+		(or
+			(unit-type-count-total scout-cavalry-line >= BLACKSMITH-IMPERIAL-MINIMUM-MILITARY-MEN)
+		(or
+			(unit-type-count-total knight-line >= BLACKSMITH-IMPERIAL-MINIMUM-MILITARY-MEN)
+			(unit-type-count-total camel-line >= BLACKSMITH-IMPERIAL-MINIMUM-MILITARY-MEN)
+		)))))
+		=>
+		(set-goal GOAL-BLACKSMITH-IMPERIAL-SWORD COND-YES)
+		(chat-local-to-self "GOAL-BLACKSMITH-IMPERIAL-SWORD is enabled")
+	)
+
+	(defrule
+		(goal GOAL-BLACKSMITH-IMPERIAL-SWORD COND-YES)
+		(current-age == imperial-age) ; don't forget to put or ; and all unique units needed
+		(unit-type-count-total militiaman-line < BLACKSMITH-IMPERIAL-MINIMUM-MILITARY-MEN)
+		(unit-type-count-total spearman-line < BLACKSMITH-IMPERIAL-MINIMUM-MILITARY-MEN)
+		(unit-type-count-total eagle-warrior-line < BLACKSMITH-IMPERIAL-MINIMUM-MILITARY-MEN)
+		(unit-type-count-total scout-cavalry-line < BLACKSMITH-IMPERIAL-MINIMUM-MILITARY-MEN)
+		(unit-type-count-total knight-line < BLACKSMITH-IMPERIAL-MINIMUM-MILITARY-MEN)
+		(unit-type-count-total camel-line < BLACKSMITH-IMPERIAL-MINIMUM-MILITARY-MEN)
+		=>
+		(set-goal GOAL-BLACKSMITH-IMPERIAL-SWORD COND-NO)
+		(chat-local-to-self "GOAL-BLACKSMITH-IMPERIAL-SWORD is disabled")
+	)
+
+	(defrule
+		(goal GOAL-BLACKSMITH-CASTLE-ARROW COND-NO)
+		(current-age == castle-age) ; don't forget to put or ; and all unique units needed and buildings
+		(or
+			(unit-type-count-total archer-line >= BLACKSMITH-CASTLE-MINIMUM-MILITARY-MEN)
+		(or
+			(unit-type-count-total skirmisher-line >= BLACKSMITH-CASTLE-MINIMUM-MILITARY-MEN)
+			(unit-type-count-total cavalry-archer-line >= BLACKSMITH-CASTLE-MINIMUM-MILITARY-MEN)
+		))
+		=>
+		(set-goal GOAL-BLACKSMITH-CASTLE-ARROW COND-YES)
+		(chat-local-to-self "GOAL-BLACKSMITH-CASTLE-ARROW is enabled")
+	)
+
+	(defrule
+		(goal GOAL-BLACKSMITH-CASTLE-ARROW COND-YES)
+		(current-age == castle-age) ; don't forget to put or ; and all unique units needed
+		(unit-type-count-total archer-line < BLACKSMITH-CASTLE-MINIMUM-MILITARY-MEN)
+		(unit-type-count-total skirmisher-line < BLACKSMITH-CASTLE-MINIMUM-MILITARY-MEN)
+		(unit-type-count-total cavalry-archer-line < BLACKSMITH-CASTLE-MINIMUM-MILITARY-MEN)
+		=>
+		(set-goal GOAL-BLACKSMITH-CASTLE-ARROW COND-NO)
+		(chat-local-to-self "GOAL-BLACKSMITH-CASTLE-ARROW is disabled")
+	)
+
+	(defrule
+		(goal GOAL-BLACKSMITH-IMPERIAL-ARROW COND-NO)
+		(current-age == imperial-age) ; don't forget to put or ; and all unique units needed
+		(or
+			(unit-type-count-total archer-line >= BLACKSMITH-IMPERIAL-MINIMUM-MILITARY-MEN)
+		(or
+			(unit-type-count-total skirmisher-line >= BLACKSMITH-IMPERIAL-MINIMUM-MILITARY-MEN)
+			(unit-type-count-total cavalry-archer-line >= BLACKSMITH-IMPERIAL-MINIMUM-MILITARY-MEN)
+		))
+		=>
+		(set-goal GOAL-BLACKSMITH-IMPERIAL-ARROW COND-YES)
+		(chat-local-to-self "GOAL-BLACKSMITH-IMPERIAL-ARROW is enabled")
+	)
+
+	(defrule
+		(goal GOAL-BLACKSMITH-IMPERIAL-ARROW COND-YES)
+		(current-age == imperial-age) ; don't forget to put or ; and all unique units needed
+		(unit-type-count-total archer-line < BLACKSMITH-IMPERIAL-MINIMUM-MILITARY-MEN)
+		(unit-type-count-total skirmisher-line < BLACKSMITH-IMPERIAL-MINIMUM-MILITARY-MEN)
+		(unit-type-count-total cavalry-archer-line < BLACKSMITH-IMPERIAL-MINIMUM-MILITARY-MEN)
+		=>
+		(set-goal GOAL-BLACKSMITH-IMPERIAL-ARROW COND-NO)
+		(chat-local-to-self "GOAL-BLACKSMITH-IMPERIAL-ARROW is disabled")
+	)
+
+	(defrule
+		(goal GOAL-BLACKSMITH-CASTLE-INFANTRY-ARMOR COND-NO)
+		(current-age == castle-age) ; don't forget to put or ; and all unique units needed and buildings
+		(or
+			(unit-type-count-total militiaman-line >= BLACKSMITH-CASTLE-MINIMUM-MILITARY-MEN)
+		(or
+			(unit-type-count-total spearman-line >= BLACKSMITH-CASTLE-MINIMUM-MILITARY-MEN)
+			(unit-type-count-total eagle-warrior-line >= BLACKSMITH-CASTLE-MINIMUM-MILITARY-MEN)
+		))
+		=>
+		(set-goal GOAL-BLACKSMITH-CASTLE-INFANTRY-ARMOR COND-YES)
+		(chat-local-to-self "GOAL-BLACKSMITH-CASTLE-INFANTRY-ARMOR is enabled")
+	)
+
+	(defrule
+		(goal GOAL-BLACKSMITH-CASTLE-INFANTRY-ARMOR COND-YES)
+		(current-age == castle-age) ; don't forget to put or ; and all unique units needed
+		(unit-type-count-total militiaman-line < BLACKSMITH-CASTLE-MINIMUM-MILITARY-MEN)
+		(unit-type-count-total spearman-line < BLACKSMITH-CASTLE-MINIMUM-MILITARY-MEN)
+		(unit-type-count-total eagle-warrior-line < BLACKSMITH-CASTLE-MINIMUM-MILITARY-MEN)
+		=>
+		(set-goal GOAL-BLACKSMITH-CASTLE-INFANTRY-ARMOR COND-NO)
+		(chat-local-to-self "GOAL-BLACKSMITH-CASTLE-INFANTRY-ARMOR is disabled")
+	)
+
+	(defrule
+		(goal GOAL-BLACKSMITH-IMPERIAL-INFANTRY-ARMOR COND-NO)
+		(current-age == imperial-age) ; don't forget to put or ; and all unique units needed
+		(or
+			(unit-type-count-total militiaman-line >= BLACKSMITH-IMPERIAL-MINIMUM-MILITARY-MEN)
+		(or
+			(unit-type-count-total spearman-line >= BLACKSMITH-IMPERIAL-MINIMUM-MILITARY-MEN)
+			(unit-type-count-total eagle-warrior-line >= BLACKSMITH-IMPERIAL-MINIMUM-MILITARY-MEN)
+		))
+		=>
+		(set-goal GOAL-BLACKSMITH-IMPERIAL-INFANTRY-ARMOR COND-YES)
+		(chat-local-to-self "GOAL-BLACKSMITH-IMPERIAL-INFANTRY-ARMOR is enabled")
+	)
+
+	(defrule
+		(goal GOAL-BLACKSMITH-IMPERIAL-INFANTRY-ARMOR COND-YES)
+		(current-age == imperial-age) ; don't forget to put or ; and all unique units needed
+		(unit-type-count-total militiaman-line < BLACKSMITH-IMPERIAL-MINIMUM-MILITARY-MEN)
+		(unit-type-count-total spearman-line < BLACKSMITH-IMPERIAL-MINIMUM-MILITARY-MEN)
+		(unit-type-count-total eagle-warrior-line < BLACKSMITH-IMPERIAL-MINIMUM-MILITARY-MEN)
+		=>
+		(set-goal GOAL-BLACKSMITH-IMPERIAL-INFANTRY-ARMOR COND-NO)
+		(chat-local-to-self "GOAL-BLACKSMITH-IMPERIAL-INFANTRY-ARMOR is disabled")
+	)
+
+	(defrule
+		(goal GOAL-BLACKSMITH-CASTLE-KNIGHT-ARMOR COND-NO)
+		(current-age == castle-age) ; don't forget to put or ; and all unique units needed and buildings
+		(or
+			(unit-type-count-total scout-cavalry-line >= BLACKSMITH-CASTLE-MINIMUM-MILITARY-MEN)
+		(or
+			(unit-type-count-total knight-line >= BLACKSMITH-CASTLE-MINIMUM-MILITARY-MEN)
+			(unit-type-count-total camel-line >= BLACKSMITH-CASTLE-MINIMUM-MILITARY-MEN)
+		))
+		=>
+		(set-goal GOAL-BLACKSMITH-CASTLE-KNIGHT-ARMOR COND-YES)
+		(chat-local-to-self "GOAL-BLACKSMITH-CASTLE-KNIGHT-ARMOR is enabled")
+	)
+
+	(defrule
+		(goal GOAL-BLACKSMITH-CASTLE-KNIGHT-ARMOR COND-YES)
+		(current-age == castle-age) ; don't forget to put or ; and all unique units needed
+		(unit-type-count-total scout-cavalry-line < BLACKSMITH-CASTLE-MINIMUM-MILITARY-MEN)
+		(unit-type-count-total knight-line < BLACKSMITH-CASTLE-MINIMUM-MILITARY-MEN)
+		(unit-type-count-total camel-line < BLACKSMITH-CASTLE-MINIMUM-MILITARY-MEN)
+		=>
+		(set-goal GOAL-BLACKSMITH-CASTLE-KNIGHT-ARMOR COND-NO)
+		(chat-local-to-self "GOAL-BLACKSMITH-CASTLE-KNIGHT-ARMOR is disabled")
+	)
+
+	(defrule
+		(goal GOAL-BLACKSMITH-IMPERIAL-KNIGHT-ARMOR COND-NO)
+		(current-age == imperial-age) ; don't forget to put or ; and all unique units needed
+		(or
+			(unit-type-count-total scout-cavalry-line >= BLACKSMITH-IMPERIAL-MINIMUM-MILITARY-MEN)
+		(or
+			(unit-type-count-total knight-line >= BLACKSMITH-IMPERIAL-MINIMUM-MILITARY-MEN)
+			(unit-type-count-total camel-line >= BLACKSMITH-IMPERIAL-MINIMUM-MILITARY-MEN)
+		))
+		=>
+		(set-goal GOAL-BLACKSMITH-IMPERIAL-KNIGHT-ARMOR COND-YES)
+		(chat-local-to-self "GOAL-BLACKSMITH-IMPERIAL-KNIGHT-ARMOR is enabled")
+	)
+
+	(defrule
+		(goal GOAL-BLACKSMITH-IMPERIAL-KNIGHT-ARMOR COND-YES)
+		(current-age == imperial-age) ; don't forget to put or ; and all unique units needed
+		(unit-type-count-total scout-cavalry-line < BLACKSMITH-CASTLE-MINIMUM-MILITARY-MEN)
+		(unit-type-count-total knight-line < BLACKSMITH-CASTLE-MINIMUM-MILITARY-MEN)
+		(unit-type-count-total camel-line < BLACKSMITH-CASTLE-MINIMUM-MILITARY-MEN)
+		=>
+		(set-goal GOAL-BLACKSMITH-IMPERIAL-KNIGHT-ARMOR COND-NO)
+		(chat-local-to-self "GOAL-BLACKSMITH-IMPERIAL-KNIGHT-ARMOR is disabled")
+	)
+
+	(defrule
+		(goal GOAL-BLACKSMITH-CASTLE-ARCHER-ARMOR COND-NO)
+		(current-age == castle-age) ; don't forget to put or ; and all unique units needed and buildings
+		(or
+			(unit-type-count-total archer-line >= BLACKSMITH-CASTLE-MINIMUM-MILITARY-MEN)
+		(or
+			(unit-type-count-total skirmisher-line >= BLACKSMITH-CASTLE-MINIMUM-MILITARY-MEN)
+			(unit-type-count-total cavalry-archer-line >= BLACKSMITH-CASTLE-MINIMUM-MILITARY-MEN)
+		))
+		=>
+		(set-goal GOAL-BLACKSMITH-CASTLE-ARCHER-ARMOR COND-YES)
+		(chat-local-to-self "GOAL-BLACKSMITH-CASTLE-ARCHER-ARMOR is enabled")
+	)
+
+	(defrule
+		(goal GOAL-BLACKSMITH-CASTLE-ARCHER-ARMOR COND-YES)
+		(current-age == castle-age) ; don't forget to put or ; and all unique units needed
+		(unit-type-count-total archer-line < BLACKSMITH-CASTLE-MINIMUM-MILITARY-MEN)
+		(unit-type-count-total skirmisher-line < BLACKSMITH-CASTLE-MINIMUM-MILITARY-MEN)
+		(unit-type-count-total cavalry-archer-line < BLACKSMITH-CASTLE-MINIMUM-MILITARY-MEN)
+		=>
+		(set-goal GOAL-BLACKSMITH-CASTLE-ARCHER-ARMOR COND-NO)
+		(chat-local-to-self "GOAL-BLACKSMITH-CASTLE-ARCHER-ARMOR is disabled")
+	)
+
+	(defrule
+		(goal GOAL-BLACKSMITH-IMPERIAL-ARCHER-ARMOR COND-NO)
+		(current-age == imperial-age) ; don't forget to put or ; and all unique units needed
+		(or
+			(unit-type-count-total archer-line >= BLACKSMITH-IMPERIAL-MINIMUM-MILITARY-MEN)
+		(or
+			(unit-type-count-total skirmisher-line >= BLACKSMITH-IMPERIAL-MINIMUM-MILITARY-MEN)
+			(unit-type-count-total cavalry-archer-line >= BLACKSMITH-IMPERIAL-MINIMUM-MILITARY-MEN)
+		))
+		=>
+		(set-goal GOAL-BLACKSMITH-IMPERIAL-ARCHER-ARMOR COND-YES)
+		(chat-local-to-self "GOAL-BLACKSMITH-IMPERIAL-ARCHER-ARMOR is enabled")
+	)
+
+	(defrule
+		(goal GOAL-BLACKSMITH-IMPERIAL-ARCHER-ARMOR COND-YES)
+		(current-age == imperial-age) ; don't forget to put or ; and all unique units needed
+		(unit-type-count-total archer-line < BLACKSMITH-IMPERIAL-MINIMUM-MILITARY-MEN)
+		(unit-type-count-total skirmisher-line < BLACKSMITH-IMPERIAL-MINIMUM-MILITARY-MEN)
+		(unit-type-count-total cavalry-archer-line < BLACKSMITH-IMPERIAL-MINIMUM-MILITARY-MEN)
+		=>
+		(set-goal GOAL-BLACKSMITH-IMPERIAL-ARCHER-ARMOR COND-NO)
+		(chat-local-to-self "GOAL-BLACKSMITH-IMPERIAL-ARCHER-ARMOR is disabled")
+	)

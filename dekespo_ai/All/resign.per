@@ -1,0 +1,60 @@
+; It may resign in two different conditions
+(defrule
+	(game-time > 9000)
+	=>
+	(chat-to-all "Man, we've been fighting for two and half hours, I'm out of here, you win!")
+	(set-goal GOAL-RESIGN COND-YES)
+	(disable-self)
+)
+
+(defrule
+	(not (can-train villager) )
+	(soldier-count == 0)
+	(unit-type-count villager == 0)
+	(not (can-build town-center))
+	=>
+	(chat-to-all "Wow, you destroyed me, congratulations!")
+	(set-goal GOAL-RESIGN COND-YES)
+	(disable-self)
+)
+
+; Tribute all resources to ally that is still in the game
+(defrule
+	(goal GOAL-RESIGN COND-YES)
+	(players-population any-ally > 0)
+	=>
+	(release-escrow wood)
+	(release-escrow food)
+	(release-escrow gold)
+	(release-escrow stone)
+	(tribute-to-player this-any-ally wood 10000)
+	(tribute-to-player this-any-ally food 10000)
+	(tribute-to-player this-any-ally gold 10000)
+	(tribute-to-player this-any-ally stone 10000)
+	(disable-self)
+)
+
+; Delete all military buildings one at the time
+(defrule
+	(goal GOAL-RESIGN COND-YES)
+	=>
+	(delete-building watch-tower)
+	(delete-building guard-tower)
+	(delete-building keep)
+	(delete-building bombard-tower)
+	(delete-building castle)
+)
+
+; When all military buildings are deleted, resign
+(defrule
+	(goal GOAL-RESIGN COND-YES)
+	(building-type-count watch-tower == 0)
+	(building-type-count guard-tower == 0)
+	(building-type-count keep == 0)
+	(building-type-count bombard-tower == 0)
+	(building-type-count castle == 0)
+	=>
+	(resign)
+	(disable-self)
+)
+

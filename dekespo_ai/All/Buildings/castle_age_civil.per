@@ -1,0 +1,95 @@
+(defrule
+	(current-age == castle-age)
+	(building-type-count-total town-center < all-castle-age-minimum-tc)
+	(can-build town-center)
+	=>
+	;(set-strategic-number sn-camp-max-distance 10)
+	(build town-center)
+	;(set-strategic-number sn-camp-max-distance all-castle-age-tc-distance-max)
+)
+
+(defrule
+	(building-type-count-total town-center >= all-castle-age-minimum-tc)
+	(building-type-count-total mill < 3)
+	(can-build mill)
+	=>
+	(build mill)
+)
+
+(defrule
+	(goal GOAL-FOOD-VS-WOOD WOOD)
+	(current-age == castle-age)
+	(building-type-count-total town-center >= all-castle-age-minimum-tc)
+	(building-type-count-total lumber-camp < 3)
+	(resource-found wood)
+	(can-build lumber-camp)
+	=>
+	(build lumber-camp)
+)
+
+(defrule
+	(goal GOAL-FOOD-VS-WOOD FOOD)
+	(building-type-count-total town-center >= all-castle-age-minimum-tc)
+	(current-age == castle-age)
+	(building-type-count-total lumber-camp < 2)
+	(resource-found wood)
+	(can-build lumber-camp)
+	=>
+	(build lumber-camp)
+)
+
+(defrule
+	(current-age == castle-age)
+	(can-build house)
+	(housing-headroom < 8) 
+	(population-headroom > 7) 
+	=>
+	(build house)
+)
+
+(defrule
+	(goal GOAL-FOOD-VS-WOOD WOOD)
+	(building-type-count-total town-center >= all-castle-age-minimum-tc)
+	(current-age == castle-age)
+	(unit-type-count-total villager > 18)
+	(building-type-count-total farm <= 17)
+	(idle-farm-count < 4)
+	=>
+	(build farm)
+)
+
+(defrule
+	(goal GOAL-FOOD-VS-WOOD FOOD)
+	(building-type-count-total town-center >= all-castle-age-minimum-tc)
+	(current-age == castle-age)
+	(unit-type-count-total villager > 18)
+	(building-type-count-total farm <= 22)
+	(idle-farm-count < 5)
+	=>
+	(build farm)
+)
+
+(defrule
+	(current-age == castle-age)
+	(building-type-count-total town-center >= all-castle-age-minimum-tc)
+	(unit-type-count-total villager >= 40)
+	(or
+		(resource-found stone)
+		(resource-found gold)
+	)
+	(building-type-count-total mining-camp < 3)
+	(can-build mining-camp)
+	=>
+	(build mining-camp)
+)
+
+(defrule
+	(building-type-count-total town-center >= all-castle-age-minimum-tc)
+	(current-age >= castle-age)
+	(unit-type-count-total villager >= all-castle-age-villagers-enough)
+	(building-type-count-total university < 1)
+	(can-build university)
+	=>
+	(build university)
+)
+

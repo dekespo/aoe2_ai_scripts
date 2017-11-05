@@ -1,0 +1,75 @@
+(defrule
+	(building-type-count-total castle < NUMBER-OF-CASTLES)
+	(can-build castle)
+	=>
+	(build castle)
+)
+
+(defrule
+	(building-type-count-total town-center >= 2)
+	(unit-type-count villager >= all-castle-age-villagers-enough)
+	(building-type-count-total barracks < CASTLE-BARRACKS)
+	(can-build barracks)
+	=>
+	(build barracks)
+)
+
+(defrule
+	(unit-type-count-total villager >= all-castle-age-villagers-enough)
+	(building-type-count-total town-center >= 2)
+	(building-type-count-total archery-range < CASTLE-ARCHERY-RANGES)
+	(can-build archery-range)
+	=>
+	(build archery-range)
+)
+
+(defrule
+	(building-type-count-total town-center >= 2)
+	(unit-type-count-total villager >= all-castle-age-villagers-enough)
+	(building-type-count-total stable < CASTLE-STABLES)
+	(can-build stable)
+	=>
+	(build stable)
+)
+
+(defrule
+	(building-type-count-total town-center >= 2)
+	(unit-type-count-total villager >= all-castle-age-villagers-enough)
+	(building-type-count-total monastery < 1)
+	(building-type-count-total town-center >= 2)
+	(can-build monastery)
+	=>
+	(build monastery)
+)
+
+(defrule
+	(current-age == castle-age)
+	(building-type-count-total town-center >= 3)
+	(building-type-count-total castle >= 1)
+	(building-type-count-total watch-tower < NUMBER-OF-TOWERS)	
+	(can-build watch-tower)
+	=>
+	;(set-strategic-number sn-camp-max-distance 8)
+	(build watch-tower)
+	;(set-strategic-number sn-camp-max-distance all-castle-age-tc-distance-max)
+)
+
+(defrule
+	(current-age == imperial-age)
+	(building-type-count-total town-center >= 3)
+	(building-type-count-total watch-tower < NUMBER-OF-TOWERS)	
+	(can-build watch-tower)
+	=>
+	;(set-strategic-number sn-camp-max-distance 8)
+	(build watch-tower)
+	;(set-strategic-number sn-camp-max-distance all-imperial-age-tc-distance-max)
+)
+
+(defrule
+	(building-type-count-total town-center >= 2)
+	(unit-type-count-total villager >= all-castle-age-villagers)
+	(building-type-count-total siege-workshop < NUMBER-OF-SIEGE-WORKSHOPS)
+	(can-build siege-workshop)
+	=>
+	(build siege-workshop)
+)

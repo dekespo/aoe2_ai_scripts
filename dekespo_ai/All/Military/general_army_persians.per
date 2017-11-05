@@ -1,0 +1,340 @@
+#load-if-defined PERSIAN-CIV
+
+; FEUDAL-AGE
+(defrule
+	(current-age >= dark-age)
+	(unit-type-count-total militiaman-line < DARK-MILITIAS)
+	(can-train militiaman-line)
+	=>
+	(train militiaman-line)
+)
+
+(defrule
+	(current-age >= feudal-age)
+	(unit-type-count-total archer-line < FEUDAL-ARCHERS)
+	(can-train archer-line)
+	=>
+	(train archer-line)
+)
+
+(defrule
+	(current-age >= feudal-age)
+	(unit-type-count-total skirmisher-line < FEUDAL-SKIRMISHERS)
+	(can-train skirmisher-line)
+	=>
+	(train skirmisher-line)
+)
+
+(defrule
+	(current-age >= feudal-age)
+	(unit-type-count-total militiaman-line < FEUDAL-MILITIAS)
+	(can-train militiaman-line)
+	=>
+	(train militiaman-line)
+)
+
+(defrule
+	(current-age >= feudal-age)
+	(unit-type-count-total spearman-line < FEUDAL-SPEARMEN)
+	(can-train spearman-line)
+	=>
+	(train spearman-line)
+)
+
+(defrule
+	(current-age >= feudal-age)
+	(unit-type-count-total scout-cavalry-line < FEUDAL-SCOUT-CAVALRYS)
+	(can-train scout-cavalry-line)
+	=>
+	(train scout-cavalry-line)
+)
+
+; CASTLE-AGE
+(defrule
+	(current-age >= castle-age)
+	(unit-type-count-total archer-line < CASTLE-ARCHERS)
+	(can-train archer-line)
+	=>
+	(train archer-line)
+)
+
+(defrule
+	(current-age >= castle-age)
+	(unit-type-count-total skirmisher-line < CASTLE-SKIRMISHERS)
+	(unit-type-count-total villager > all-castle-age-villagers-enough)
+	(can-train skirmisher-line)
+	=>
+	(train skirmisher-line)
+)
+
+(defrule
+	(current-age >= castle-age)
+	(unit-type-count-total cavalry-archer-line < CASTLE-CAVALRY-ARCHERS)
+	(unit-type-count-total villager > all-castle-age-villagers-enough)
+	(research-completed ri-thumb-ring)
+	(research-completed ri-bloodlines)
+	(can-train cavalry-archer-line)
+	=>
+	(train cavalry-archer-line)
+)
+
+(defrule
+	(current-age >= castle-age)
+	(unit-type-count-total militiaman-line < CASTLE-MILITIAS)
+	(can-train militiaman-line)
+	=>
+	(train militiaman-line)
+)
+
+(defrule
+	(current-age >= castle-age)
+	(unit-type-count-total spearman-line < CASTLE-SPEARMEN)
+	(unit-type-count-total villager > all-castle-age-villagers-enough)
+	(can-train spearman-line)
+	=>
+	(train spearman-line)
+)
+
+(defrule
+	(current-age >= castle-age)
+	(unit-type-count-total eagle-warrior-line < CASTLE-EAGLE-WARRIORS)
+	(can-train eagle-warrior-line)
+	=>
+	(train eagle-warrior-line)
+)
+
+(defrule
+	(current-age >= castle-age)
+	(unit-type-count-total scout-cavalry-line < CASTLE-SCOUT-CAVALRYS)
+	(can-train scout-cavalry-line)
+	=>
+	(train scout-cavalry-line)
+)
+
+(defrule
+	(current-age >= castle-age)
+	(unit-type-count-total knight-line < CASTLE-KNIGHTS)
+	(unit-type-count-total villager > all-castle-age-villagers-enough)
+	(can-train knight-line)
+	=>
+	(train knight-line)
+)
+
+(defrule
+	(current-age >= castle-age)
+	(unit-type-count-total camel-line < CASTLE-CAMELS)
+	(unit-type-count-total villager > all-castle-age-villagers-enough)
+	(unit-type-count-total cavalry-archer-line > 0)
+	(can-train camel-line)
+	=>
+	(train camel-line)
+)
+
+(defrule
+	(current-age >= castle-age)
+	(unit-type-count-total monk < CASTLE-MONKS)
+	(can-train monk)
+	=>
+	(train monk)
+)
+
+(defrule
+	(current-age >= castle-age)
+	(unit-type-count-total my-unique-unit-line < CASTLE-MY-UNIQUE-UNITS)
+	(can-train my-unique-unit-line)
+	=>
+	(train my-unique-unit-line)
+)
+
+(defrule
+	(current-age >= castle-age)
+	(unit-type-count-total petard < CASTLE-PETARDS)
+	(can-train petard)
+	=>
+	(train petard)
+)
+
+(defrule
+	(current-age >= castle-age)
+	(unit-type-count-total mangonel-line < CASTLE-MANGONELS)
+	(can-train mangonel-line)
+	=>
+	(train mangonel-line)
+)
+
+(defrule
+	(current-age >= castle-age)
+	(unit-type-count-total battering-ram-line < CASTLE-BATTERING-RAMS)
+	(can-train battering-ram-line)
+	=>
+	(train battering-ram-line)
+)
+
+(defrule
+	(current-age >= castle-age)
+	(unit-type-count-total scorpion-line < CASTLE-SCORPIONS)
+	(can-train scorpion-line)
+	=>
+	(train scorpion-line)
+)
+
+; IMPERIAL-AGE
+(defrule
+	(current-age == imperial-age)
+	(unit-type-count-total archer-line < IMPERIAL-ARCHERS)
+	(can-train archer-line)
+	=>
+	(train archer-line)
+)
+
+(defrule
+	(current-age == imperial-age)
+	(unit-type-count-total skirmisher-line < IMPERIAL-SKIRMISHERS)
+	(unit-type-count-total villager > all-imperial-age-villagers-enough)
+	(research-completed ri-elite-skirmisher)
+	(can-train skirmisher-line)
+	=>
+	(train skirmisher-line)
+)
+
+(defrule
+	(current-age == imperial-age)
+	(unit-type-count-total cavalry-archer-line < IMPERIAL-CAVALRY-ARCHERS)
+	(unit-type-count-total villager > all-imperial-age-villagers-enough)
+	(research-completed ri-heavy-cavalry-archer)
+	(can-train cavalry-archer-line)
+	=>
+	(train cavalry-archer-line)
+)
+
+(defrule
+	(current-age == imperial-age)
+	(unit-type-count-total hand-cannoneer < IMPERIAL-HAND-CANNONEERS)
+	(can-train hand-cannoneer)
+	=>
+	(train hand-cannoneer)
+)
+
+(defrule
+	(current-age == imperial-age)
+	(unit-type-count-total militiaman-line < IMPERIAL-MILITIAS)
+	(can-train militiaman-line)
+	=>
+	(train militiaman-line)
+)
+
+(defrule
+	(current-age == imperial-age)
+	(unit-type-count-total spearman-line < IMPERIAL-SPEARMEN)
+	(unit-type-count-total villager > all-imperial-age-villagers-enough)
+	(research-completed ri-halberdier)
+	(can-train spearman-line)
+	=>
+	(train spearman-line)
+)
+
+(defrule
+	(current-age == imperial-age)
+	(unit-type-count-total eagle-warrior-line < IMPERIAL-EAGLE-WARRIORS)
+	(can-train eagle-warrior-line)
+	=>
+	(train eagle-warrior-line)
+)
+
+(defrule
+	(current-age == imperial-age)
+	(unit-type-count-total scout-cavalry-line < IMPERIAL-SCOUT-CAVALRYS)
+	(unit-type-count-total villager > all-imperial-age-villagers-enough)
+	(research-completed ri-paladin)
+	(research-completed ri-hussar)
+	(research-completed ri-heavy-camel)
+	(can-train scout-cavalry-line)
+	=>
+	(train scout-cavalry-line)
+)
+
+(defrule
+	(current-age == imperial-age)
+	(unit-type-count-total knight-line < IMPERIAL-KNIGHTS)
+	(unit-type-count-total villager > all-imperial-age-villagers-enough)
+	(research-completed ri-cavalier)
+	(can-train knight-line)
+	=>
+	(train knight-line)
+)
+
+(defrule
+	(current-age == imperial-age)
+	(unit-type-count-total camel-line < IMPERIAL-CAMELS)
+	(unit-type-count-total villager > all-imperial-age-villagers-enough)
+	(research-completed ri-heavy-camel)
+	(can-train camel-line)
+	=>
+	(train camel-line)
+)
+
+(defrule
+	(current-age == imperial-age)
+	(unit-type-count-total monk < IMPERIAL-MONKS)
+	(can-train monk)
+	=>
+	(train monk)
+)
+
+(defrule
+	(current-age == imperial-age)
+	(unit-type-count-total my-unique-unit-line < IMPERIAL-MY-UNIQUE-UNITS)
+	(can-train my-unique-unit-line)
+	=>
+	(train my-unique-unit-line)
+)
+
+(defrule
+	(current-age == imperial-age)
+	(unit-type-count-total petard < IMPERIAL-PETARDS)
+	(can-train petard)
+	=>
+	(train petard)
+)
+
+(defrule
+	(current-age == imperial-age)
+	(unit-type-count-total trebuchet < IMPERIAL-TREBUCHETS)
+	(can-train trebuchet)
+	=>
+	(train trebuchet)
+)
+
+(defrule
+	(current-age == imperial-age)
+	(unit-type-count-total mangonel-line < IMPERIAL-MANGONELS)
+	(can-train mangonel-line)
+	=>
+	(train mangonel-line)
+)
+
+(defrule
+	(current-age == imperial-age)
+	(unit-type-count-total battering-ram-line < IMPERIAL-BATTERING-RAMS)
+	(can-train battering-ram-line)
+	=>
+	(train battering-ram-line)
+)
+
+(defrule
+	(current-age == imperial-age)
+	(unit-type-count-total scorpion-line < IMPERIAL-SCORPIONS)
+	(can-train scorpion-line)
+	=>
+	(train scorpion-line)
+)
+
+(defrule
+	(current-age == imperial-age)
+	(unit-type-count-total bombard-cannon < IMPERIAL-BOMBARD-CANNONS)
+	(can-train bombard-cannon)
+	=>
+	(train bombard-cannon)
+)
+
+#end-if

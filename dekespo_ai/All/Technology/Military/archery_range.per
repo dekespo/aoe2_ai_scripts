@@ -1,0 +1,95 @@
+(defrule
+	;(current-age >= castle-age)
+	(unit-type-count-total archer-line > army-update-technology)
+	(or
+		(unit-type-count-total villager == all-feudal-age-villagers)
+		(food-amount >= all-feudal-age-villager-minimum-food-left)
+	)
+	;(wood-amount >= all-feudal-age-villager-minimum-food-left)
+	(can-research ri-crossbow)
+	=>
+	(research ri-crossbow)
+	(chat-local-to-self "Researching CROSSBOW")
+	;(disable-self)
+)
+
+(defrule
+	;(current-age >= imperial-age)
+	(unit-type-count-total archer-line >= army-update-technology)
+	(or
+		(unit-type-count-total villager == all-feudal-age-villagers)
+		(food-amount >= all-feudal-age-villager-minimum-food-left)
+	)
+	;(wood-amount >= all-feudal-age-villager-minimum-food-left)
+	(can-research ri-arbalest)
+	=>
+	(research ri-arbalest)
+	(chat-local-to-self "Researching ARBALEST")
+	;(disable-self)
+)
+
+(defrule
+	;(current-age >= castle-age)
+	(unit-type-count-total skirmisher-line >= army-update-technology)
+	(or
+		(unit-type-count-total villager == all-feudal-age-villagers)
+		(food-amount >= all-feudal-age-villager-minimum-food-left)
+	)
+	;(wood-amount >= all-feudal-age-villager-minimum-food-left)
+	(can-research ri-elite-skirmisher)
+	=>
+	(research ri-elite-skirmisher)
+	(chat-local-to-self "Researching ELITE SKIRMISHER")
+	;(disable-self)
+)
+
+(defrule
+	;(current-age >= imperial-age)
+	(unit-type-count-total cavalry-archer-line >= army-update-technology)
+	(or
+		(unit-type-count-total villager == all-feudal-age-villagers)
+		(food-amount >= all-feudal-age-villager-minimum-food-left)
+	)
+	;(wood-amount >= all-feudal-age-villager-minimum-food-left)
+	(can-research ri-heavy-cavalry-archer)
+	=>
+	(research ri-heavy-cavalry-archer)
+	(chat-local-to-self "Researching HEAVY CAVALRY ARCHER")
+	;(disable-self)
+)
+
+(defrule
+	;(current-age >= castle-age)
+	(or
+		(unit-type-count-total archer-line >= army-update-technology)
+		(or
+			(unit-type-count-total skirmisher-line >= army-update-technology)
+			(unit-type-count-total cavalry-archer-line >= army-update-technology)
+		)
+	)
+	(or
+		(unit-type-count-total villager == all-feudal-age-villagers)
+		(food-amount >= all-feudal-age-villager-minimum-food-left)
+	)
+	;(wood-amount >= all-feudal-age-villager-minimum-food-left)
+	(can-research ri-thumb-ring)
+	=>
+	(research ri-thumb-ring)
+	(chat-local-to-self "Researching THUMB RING")
+	;(disable-self)
+)
+
+(defrule
+	;(current-age >= imperial-age)
+	(unit-type-count-total cavalry-archer-line >= army-update-technology)
+	(or
+		(unit-type-count-total villager == all-feudal-age-villagers)
+		(food-amount >= all-feudal-age-villager-minimum-food-left)
+	)
+	;(wood-amount >= all-feudal-age-villager-minimum-food-left)
+	(can-research ri-parthian-tactics)
+	=>
+	(research ri-parthian-tactics)
+	(chat-local-to-self "Researching PARTHIAN TACTICS")
+	;(disable-self)
+)

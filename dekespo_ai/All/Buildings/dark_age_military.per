@@ -1,0 +1,10 @@
+(defrule
+	(building-type-count mill > 0)
+	(building-type-count lumber-camp > 0)
+	(building-type-count-total barracks < 1)
+	(unit-type-count villager >= all-dark-age-villagers)
+	(can-build barracks)
+	=>
+	(build barracks)
+)
+

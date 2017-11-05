@@ -1,0 +1,116 @@
+(defrule
+	;(current-age >= castle-age)
+	(unit-type-count-total scout-cavalry-line >= army-update-technology)
+	(or
+		(unit-type-count-total villager == all-feudal-age-villagers)
+		(food-amount >= all-feudal-age-villager-minimum-food-left)
+	)
+	;(wood-amount >= all-feudal-age-villager-minimum-food-left)
+	(can-research ri-light-cavalry)
+	=>
+	(research ri-light-cavalry)
+	(chat-local-to-self "Researching LIGHT CAVALRY")
+	;(disable-self)
+)
+
+(defrule
+	;(current-age >= imperial-age)
+	(unit-type-count-total scout-cavalry-line >= army-update-technology)
+	(or
+		(unit-type-count-total villager == all-feudal-age-villagers)
+		(food-amount >= all-feudal-age-villager-minimum-food-left)
+	)
+	;(wood-amount >= all-feudal-age-villager-minimum-food-left)
+	(can-research ri-hussar)
+	=>
+	(research ri-hussar)
+	(chat-local-to-self "Researching HUSSAR")
+	;(disable-self)
+)
+
+(defrule
+	;(current-age >= imperial-age)
+	(unit-type-count-total knight-line >= army-update-technology)
+	(or
+		(unit-type-count-total villager == all-feudal-age-villagers)
+		(food-amount >= all-feudal-age-villager-minimum-food-left)
+	)
+	;(wood-amount >= all-feudal-age-villager-minimum-food-left)
+	(can-research ri-cavalier)
+	=>
+	(research ri-cavalier)
+	(chat-local-to-self "Researching CAVALIER")
+	;(disable-self)
+)
+ 
+(defrule
+	;(current-age >= imperial-age)
+	(unit-type-count-total knight-line >= army-update-technology)
+	(or
+		(unit-type-count-total villager == all-feudal-age-villagers)
+		(food-amount >= all-feudal-age-villager-minimum-food-left)
+	)
+	;(wood-amount >= all-feudal-age-villager-minimum-food-left)
+	(can-research ri-paladin)
+	=>
+	(research ri-paladin)
+	(chat-local-to-self "Researching PALADIN")
+	;(disable-self)
+)
+
+(defrule
+	;(current-age >= imperial-age)
+	(unit-type-count-total camel-line >= army-update-technology)
+	(or
+		(unit-type-count-total villager == all-feudal-age-villagers)
+		(food-amount >= all-feudal-age-villager-minimum-food-left)
+	)
+	;(wood-amount >= all-feudal-age-villager-minimum-food-left)
+	(can-research ri-heavy-camel)
+	=>
+	(research ri-heavy-camel)
+	(chat-local-to-self "Researching HEAVY CAMEL")
+	;(disable-self)
+)
+
+(defrule
+	;(current-age >= castle-age)
+	(or
+		(unit-type-count-total scout-cavalry-line >= army-update-technology)
+		(or
+			(unit-type-count-total knight-line >= army-update-technology)
+			(unit-type-count-total camel-line >= army-update-technology)
+		)
+	)
+	(or
+		(unit-type-count-total villager == all-feudal-age-villagers)
+		(food-amount >= all-feudal-age-villager-minimum-food-left)
+	)
+	;(wood-amount >= all-feudal-age-villager-minimum-food-left)
+	(can-research ri-bloodlines)
+	=>
+	(research ri-bloodlines)
+	(chat-local-to-self "Researching BLOODLINES")
+	;(disable-self)
+)
+
+(defrule
+	;(current-age >= castle-age)
+	(or
+		(unit-type-count-total scout-cavalry-line >= army-update-technology)
+		(or
+			(unit-type-count-total knight-line >= army-update-technology)
+			(unit-type-count-total camel-line >= army-update-technology)
+		)
+	)
+	(or
+		(unit-type-count-total villager == all-feudal-age-villagers)
+		(food-amount >= all-feudal-age-villager-minimum-food-left)
+	)
+	;(wood-amount >= all-feudal-age-villager-minimum-food-left)
+	(can-research ri-husbandry)
+	=>
+	(research ri-husbandry)
+	(chat-local-to-self "Researching HUSBANDRY")
+	;(disable-self)
+)

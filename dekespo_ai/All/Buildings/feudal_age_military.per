@@ -1,0 +1,31 @@
+(defrule
+	(building-type-count barracks > 0)
+	(building-type-count-total archery-range < FEUDAL-ARCHERY-RANGES)
+	(can-build archery-range)
+	=>
+	(build archery-range)
+)
+
+(defrule
+	(building-type-count blacksmith > 0)
+	(building-type-count market > 0)
+	(building-type-count barracks < FEUDAL-BARRACKS)
+	(building-type-count-total archery-range > 0)
+	(unit-type-count-total villager >= all-feudal-age-villagers)
+	(can-build barracks)
+	=>
+	(build barracks)
+)
+
+(defrule
+	(building-type-count blacksmith > 0)
+	(building-type-count market > 0)
+	(building-type-count barracks > 0)
+	(building-type-count stable < FEUDAL-STABLES)
+	(building-type-count-total archery-range > 0)
+	(unit-type-count-total villager >= all-feudal-age-villagers)
+	(can-build stable)
+	=>
+	(build stable)
+)
+

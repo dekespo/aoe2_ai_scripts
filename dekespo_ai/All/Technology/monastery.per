@@ -1,0 +1,49 @@
+(defrule
+	(current-age == imperial-age)
+	(research-completed ri-town-patrol)
+	(can-research ri-sanctity)
+	=>
+	(research ri-sanctity)
+	(chat-local-to-self "Researching SANCTITY")
+	;(disable-self)
+)
+
+(defrule
+	(current-age == imperial-age)
+	(research-completed ri-sanctity)
+	(can-research ri-fervor)
+	=>
+	(research ri-fervor)
+	(chat-local-to-self "Researching FERVOR")
+	;(disable-self)
+)
+
+(defrule
+	(current-age == imperial-age)
+	(research-completed ri-fervor)
+	(can-research ri-block-printing)
+	=>
+	(research ri-block-printing)
+	(chat-local-to-self "Researching BLOCK PRINTING")
+	;(disable-self)
+)
+
+(defrule
+	(current-age == imperial-age)
+	(research-completed ri-block-printing)
+	(can-research ri-heresy)
+	=>
+	(research ri-heresy)
+	(chat-local-to-self "Researching HERESY")
+	;(disable-self)
+)
+
+(defrule
+	(current-age == imperial-age)
+	(gold-amount > 3000)
+	(can-research ri-faith)
+	=>
+	(research ri-faith)
+	(chat-local-to-self "Researching FAITH")
+	;(disable-self)
+)

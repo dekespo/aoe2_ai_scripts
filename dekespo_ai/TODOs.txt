@@ -1,0 +1,5 @@
+Give a speical name convenient for different purposes
+    Separate the allconstants.per file into different files
+Make economy time indepedent, but situation dependent (use time for a backplan)
+Add defeat option: if there is no town center and cannot built it, just resign
+Learn how to add custom colourization, then colourify for different var

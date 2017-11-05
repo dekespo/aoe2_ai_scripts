@@ -1,0 +1,39 @@
+(defrule
+	(current-age == dark-age)
+	(building-type-count-total mill > 0)
+	(building-type-count-total lumber-camp > 0)
+	(unit-type-count-total villager >= all-dark-age-villagers)
+	(can-research feudal-age)
+	=>
+	(research feudal-age)
+	(chat-local-to-self "Feudal Age, here we come!")
+)
+
+(defrule
+	(current-age == feudal-age)
+	(building-type-count-total blacksmith > 0)
+	(building-type-count-total market > 0)
+	(unit-type-count-total villager >= all-feudal-age-villagers)
+	(can-research castle-age)
+	=>
+	(research castle-age)
+	(chat-local-to-self "Castle Age, here we come!")
+)
+
+(defrule
+	(current-age == castle-age)
+	(or
+		(and
+			(building-type-count monastery > 0)
+			(building-type-count university > 0)
+		)
+		(building-type-count castle > 0)
+	)
+	;(research-completed ri-hand-cart)
+	(unit-type-count-total villager >= all-castle-age-villagers)
+	(can-research imperial-age)
+	=>
+	(research imperial-age)
+	(chat-local-to-self "Imperial Age, here we come!")
+)
+

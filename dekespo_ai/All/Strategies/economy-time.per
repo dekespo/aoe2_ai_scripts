@@ -1,0 +1,157 @@
+; START
+(defrule
+	(true)
+	=>
+	(set-strategic-number sn-maximum-wood-drop-distance 10)
+	(set-strategic-number sn-maximum-food-drop-distance 8)
+	(set-strategic-number sn-maximum-hunt-drop-distance 0)
+	(set-strategic-number sn-maximum-gold-drop-distance 8)
+	(set-strategic-number sn-maximum-stone-drop-distance 8)
+	(set-strategic-number sn-maximum-fish-boat-drop-distance 8)
+	(set-strategic-number sn-camp-max-distance 10)
+	(set-strategic-number sn-required-forest-tiles 5)
+	(disable-self)
+)
+
+; > MIN 5
+(defrule
+	(game-time > 300)
+	=>
+	;(set-strategic-number sn-maximum-wood-drop-distance 12)
+	;(set-strategic-number sn-maximum-hunt-drop-distance 25)
+	(set-strategic-number sn-camp-max-distance 12)
+	(disable-self)
+)
+
+; > MIN 10
+(defrule
+	(game-time > 600)
+	=>
+	;(set-strategic-number sn-maximum-wood-drop-distance 12)
+	;(set-strategic-number sn-maximum-hunt-drop-distance 25)
+	(set-strategic-number sn-camp-max-distance 15)
+	(disable-self)
+)
+
+; > MIN 15
+(defrule
+	(game-time > 900)
+	=>
+	(set-strategic-number sn-maximum-wood-drop-distance 10)
+	;(set-strategic-number sn-maximum-hunt-drop-distance 15)
+	(set-strategic-number sn-camp-max-distance 20)
+	(disable-self)
+)
+
+; > MIN 20
+(defrule
+	(game-time > 1200)
+	=>
+	(set-strategic-number sn-maximum-wood-drop-distance 15)
+	;(set-strategic-number sn-maximum-hunt-drop-distance 0)
+	;(set-strategic-number sn-maximum-fish-boat-drop-distance 0)
+	(set-strategic-number sn-camp-max-distance 25)
+	(disable-self)
+)
+
+; > MIN 25
+(defrule
+	(game-time > 1500)
+	=>
+	;(set-strategic-number sn-camp-max-distance 30)
+	(set-strategic-number sn-camp-max-distance 40)
+	(disable-self)
+)
+
+; > MIN 30
+(defrule
+	(game-time > 1800)
+	=>
+	;(set-strategic-number sn-camp-max-distance 35)
+	(set-strategic-number sn-camp-max-distance 50)
+	(disable-self)
+)
+
+; > MIN 35
+(defrule
+	(game-time > 2100)
+	=>
+	;(set-strategic-number sn-camp-max-distance 40)
+	(set-strategic-number sn-camp-max-distance 60)
+	(disable-self)
+)
+
+; > MIN 40
+(defrule
+	(game-time > 2400)
+	=>
+	;(set-strategic-number sn-camp-max-distance 55)
+	(set-strategic-number sn-camp-max-distance 80)
+	(disable-self)
+)
+
+; > MIN 45
+(defrule
+	(game-time > 2700)
+	=>
+	;(set-strategic-number sn-camp-max-distance 70)
+	(set-strategic-number sn-camp-max-distance 100)
+	(disable-self)
+)
+
+; > MIN 50
+(defrule
+	(game-time > 3000)
+	=>
+	(set-strategic-number sn-camp-max-distance 120)
+	(disable-self)
+)
+
+; > MIN 55
+(defrule
+	(game-time > 3300)
+	=>
+	(set-strategic-number sn-camp-max-distance 160)
+	(disable-self)
+)
+
+; > MIN 60 (FINAL EXPANSION)
+(defrule
+	(game-time > 3600)
+	=>
+	(set-strategic-number sn-camp-max-distance 999)
+	(disable-self)
+)
+
+;; > MIN 65
+;(defrule
+;	(game-time > 3900)
+;	=>
+;	(set-strategic-number sn-camp-max-distance 70)
+;	(disable-self)
+;)
+;
+;; > MIN 70
+;(defrule
+;	(game-time > 4200)
+;	=>
+;	(set-strategic-number sn-camp-max-distance 75)
+;	(disable-self)
+;)
+;
+;; > MIN 75
+;(defrule
+;	(game-time > 4500)
+;	=>
+;	(set-strategic-number sn-camp-max-distance 80)
+;	(disable-self)
+;)
+;
+;; > MIN 90 (FINAL: EXPANSION)
+;(defrule
+;	(game-time > 5400)
+;	=>
+;	(set-strategic-number sn-camp-max-distance 100)
+;	(disable-self)
+;)
+;

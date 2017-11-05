@@ -1,0 +1,125 @@
+; General Boolean Conditions for goals, None is usually defined in the beginning in the game
+(defconst COND-NONE 0)
+(defconst COND-YES 1)
+(defconst COND-NO 2)
+
+; Goal List
+(defconst GOAL-FOOD-VS-WOOD 1)
+	(defconst FOOD 1)
+	(defconst WOOD 2)
+;(defconst GOAL-BLACKSMITH 2)
+;	(defconst LAND-ARCHER 1)
+;	(defconst CAVALRY-ARCHER 2)
+;	(defconst INFANTRY 3)
+;	(defconst KNIGHT 4)
+(defconst GOAL-ENABLE-TSA 3)
+(defconst GOAL-RESIGN 4)
+; TODO What happened to ID 5?
+(defconst GOAL-FOOD-SEARCH 6)
+(defconst GOAL-FOOD-FOUND 7) 
+(defconst GOAL-WOOD-FOUND 8) 
+(defconst GOAL-BOAR-FOUND 9)
+(defconst GOAL-DEER-FOUND 10)
+(defconst GOAL-ENABLE-BOAR-HUNTING 11)
+(defconst GOAL-ENABLE-DEER-HUNTING 12)
+(defconst GOAL-BLACKSMITH-CASTLE-SWORD 13)
+(defconst GOAL-BLACKSMITH-CASTLE-ARROW 14)
+(defconst GOAL-BLACKSMITH-CASTLE-INFANTRY-ARMOR 15)
+(defconst GOAL-BLACKSMITH-CASTLE-KNIGHT-ARMOR 16)
+(defconst GOAL-BLACKSMITH-CASTLE-ARCHER-ARMOR 17)
+	(defconst BLACKSMITH-CASTLE-MINIMUM-MILITARY-MEN 5)
+(defconst GOAL-BLACKSMITH-IMPERIAL-SWORD 18)
+(defconst GOAL-BLACKSMITH-IMPERIAL-ARROW 19)
+(defconst GOAL-BLACKSMITH-IMPERIAL-INFANTRY-ARMOR 20)
+(defconst GOAL-BLACKSMITH-IMPERIAL-KNIGHT-ARMOR 21)
+(defconst GOAL-BLACKSMITH-IMPERIAL-ARCHER-ARMOR 22)
+	(defconst BLACKSMITH-IMPERIAL-MINIMUM-MILITARY-MEN 10)
+
+; Timers (still available up to 10?)
+(defconst TIMER-ATTACK 1)
+(defconst TIMER-ASK-FOOD 2)
+(defconst TIMER-ASK-WOOD 3)
+(defconst TIMER-ASK-GOLD 4)
+(defconst TIMER-ATTACK-ALLIES 5)
+(defconst TIMER-DEFEND-ALLIES 6)
+
+; Periods in seconds
+(defconst PERIOD-ATTACK-READY 120)
+(defconst PERIOD-ATTACK-ALLIES 120)
+(defconst PERIOD-ATTACK-ANYWAY 240)
+(defconst PERIOD-DEFEND-ALLIES 60)
+(defconst PERIOD-ALLIES-ASK-FOOD 180)
+(defconst PERIOD-ALLIES-ASK-WOOD 180)
+(defconst PERIOD-ALLIES-ASK-GOLD 180)
+
+
+;FOR ALL
+; DARK AGE
+	(defconst all-dark-age-villagers 15)
+	(defconst all-dark-age-food-amount 400)
+	(defconst all-dark-age-wood-amount 400)
+	(defconst all-dark-age-search-period-second 120)
+	(defconst all-dark-age-villagers-distance 15)
+	(defconst all-dark-age-tc-distance-min 2)
+	(defconst all-dark-age-tc-distance-max 8)
+
+; FEUDAL AGE
+	(defconst all-feudal-age-villagers 20)
+	(defconst all-feudal-age-food-amount 600)
+	(defconst all-feudal-age-wood-amount 400)
+	(defconst all-feudal-age-villagers-distance 15)
+	(defconst all-feudal-age-tc-distance-min 2)
+	(defconst all-feudal-age-tc-distance-max 10)
+	(defconst all-feudal-age-villager-minimum-food-left 50)
+
+; CASTLE AGE
+	(defconst all-castle-age-villagers 50)
+	(defconst all-castle-age-food-amount 800)
+	(defconst all-castle-age-wood-amount 500)
+	;(defconst all-castle-age-gold-amount 300)
+	;(defconst all-castle-age-stone-amount 200)
+	(defconst all-castle-age-villagers-distance 10)
+	(defconst all-castle-age-tc-distance-min 2)
+	(defconst all-castle-age-tc-distance-max 20)
+	(defconst all-castle-age-villager-minimum-food-left 150)
+	(defconst all-castle-age-villagers-enough 40)
+	(defconst all-castle-age-minimum-tc 3)
+
+; IMPERIAL AGE
+	(defconst all-imperial-age-villagers 70)
+	;(defconst all-imperial-age-villagers-allies 70)
+	(defconst all-imperial-age-villagers-distance 10)
+	(defconst all-imperial-age-villagers-enough 60)
+	(defconst all-imperial-age-tc-distance-min 2)
+	(defconst all-imperial-age-tc-distance-max 30) ; 25
+	(defconst all-imperial-age-minimum-tc 3)
+
+
+; Wild-Boar hunting
+	(defconst boar-kill-distance 10)
+	(defconst boar-maximum-lure-distance 35)
+	(defconst boar-lure-group-size 4)
+	(defconst boar-kill-group-size 8)
+
+; Deer Hunting
+	(defconst deer-maximum-distance 30)
+	(defconst deer-max-dropoff-distance 10)
+	(defconst deer-max-mill-build-distance 30)
+	(defconst deer-hunter-count 6)
+
+; Army For Technology
+	(defconst army-update-technology 5)
+	(defconst army-siege-update-technology 2)
+
+; Just Thing Numbers
+	(defconst sheep 958) 
+	(defconst deer 65)
+	(defconst male-forager 120)
+	(defconst female-forager 354)
+	;(defconst male-shepherd 592)
+	;(defconst female-shepherd 590)
+	(defconst female-gold-miner 579)
+	(defconst male-gold-miner 581)
+	(defconst food-gatherer 978)
+	(defconst unpacked-trebuchet 42)
+	(defconst ri-chivalry 493)

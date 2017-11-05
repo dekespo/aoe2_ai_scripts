@@ -1,0 +1,125 @@
+; Target Evaluations
+	(defrule
+		(true)
+		=>
+		(set-strategic-number sn-target-evaluation-distance 200) ;default 50
+		(set-strategic-number sn-target-evaluation-hitpoints 0)
+		(set-strategic-number sn-target-evaluation-damage-capability 25)
+		(set-strategic-number sn-target-evaluation-kills 0)
+		(set-strategic-number sn-target-evaluation-ally-proximity 25)
+		(set-strategic-number sn-target-evaluation-rof 0)
+		(set-strategic-number sn-target-evaluation-randomness 0)
+		(set-strategic-number sn-target-evaluation-attack-attempts 25) ;default -25
+		(set-strategic-number sn-target-evaluation-range 25)
+		(set-strategic-number sn-target-evaluation-continent 25) ; default 100
+		(set-strategic-number sn-target-evaluation-siege-weapon 25)
+		(set-strategic-number sn-target-evaluation-boat 0)
+		(set-strategic-number sn-target-evaluation-time-kill-ratio 25) ;default 20
+		(set-strategic-number sn-target-evaluation-in-progress 25) ;default 50 
+		(disable-self)
+	)
+
+; Arrange civil and military explorers
+	(defrule
+		(true)
+		=>
+		(set-strategic-number sn-minimum-civilian-explorers 0)
+		(set-strategic-number sn-cap-civilian-explorers 0)
+		(set-strategic-number sn-total-number-explorers 1)
+		(set-strategic-number sn-number-explore-groups 1)
+		(set-strategic-number sn-initial-exploration-required 0)
+		(set-strategic-number sn-task-ungrouped-soldiers 0); disable
+		(disable-self)
+	)
+
+; Others distance of things, garrisons, dodge and maintain distance
+	(defrule
+		(true)
+		=>
+		(set-strategic-number sn-mill-max-distance 25)
+		(set-difficulty-parameter ability-to-dodge-missiles 0)
+		(set-difficulty-parameter ability-to-maintain-distance 0)
+		(set-strategic-number sn-relic-return-distance 100)
+		(set-strategic-number sn-garrison-rams 4)
+		(disable-self)
+	)
+
+; Defensing within town center distance and its actions
+	(defrule
+		(true)
+		=>
+		(set-strategic-number sn-defense-distance 25)
+		(set-strategic-number sn-sentry-distance 0)
+		(set-strategic-number sn-sentry-distance-variation 0)
+		(set-strategic-number sn-defend-overlap-distance 10)
+		(set-strategic-number sn-consecutive-idle-unit-limit 5)
+		(set-strategic-number sn-gather-defense-units 1)
+		(disable-self)
+	)
+
+; Attack and defend groups (size and form)
+	; General Rules
+	(defrule
+		(true)
+		=>
+		(set-strategic-number sn-percent-enemy-sighted-response 99)
+		(set-strategic-number sn-enemy-sighted-response-distance 15)
+		(set-strategic-number sn-group-form-distance 250)
+		(disable-self)
+	)
+
+	; Attack
+	(defrule
+		(true)
+		=>
+		;(set-strategic-number sn-attack-coordination 2); multiple group attack ; not available now
+		(set-strategic-number sn-attack-intelligence 1); attack wisely
+		(set-strategic-number sn-attack-group-size-randomness 0)
+		;(set-strategic-number sn-scale-minimum-attack-group-size 0)
+		;(set-strategic-number sn-scale-maximum-attack-group-size 0)
+		;(set-strategic-number sn-number-attack-groups 0)
+		;(set-strategic-number sn-minimum-attack-group-size 1)
+		;(set-strategic-number sn-maximum-attack-group-size 1)
+		;(set-strategic-number sn-attack-group-gather-spacing 9)
+		;(set-strategic-number sn-percent-attack-soldiers 80) ; %80 attackers
+		(set-strategic-number sn-enable-patrol-attack 1)
+		(disable-self)
+	)
+
+	; Defend
+	(defrule
+		(true)
+		=>
+		; 20% soldiers will be in defense from attack
+		;(set-strategic-number sn-number-defend-groups 0)
+		;(set-strategic-number sn-minimum-defend-group-size 1)
+		;(set-strategic-number sn-maximum-defend-group-size 200)
+		(disable-self)
+	)
+
+; Attacking on whom and ally agreement
+	(defrule
+		(true)
+		=>
+		(set-strategic-number sn-percent-enemy-sighted-response 99)
+		(set-strategic-number sn-attack-winning-player 0)
+		(set-strategic-number sn-coop-share-information 100)
+		(set-strategic-number sn-attack-winning-player-factor 1)
+		(set-strategic-number sn-coop-share-attacking 1)
+		(set-strategic-number sn-coop-share-attacking-interval 30) ;Seconds
+		(disable-self)
+	)
+
+; Number of villagers for what buildings
+	(defrule
+		(true)
+		=>
+		(up-assign-builders c: castle c: 3)
+		(up-assign-builders c: town-center-foundation c: 3)
+		; (up-assign-builders c: town-centerc: 3) ; not working
+		(disable-self)
+	)
+
+; Load other strategies
+	(load "dekespo_ai\All\Strategies\economy-time")
+	(load "dekespo_ai\All\Strategies\economy-ages")

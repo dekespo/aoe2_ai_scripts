@@ -1,0 +1,182 @@
+(defrule
+	;(current-age >= castle-age)
+	(unit-type-count-total militiaman-line >= army-update-technology)
+	(or
+		(unit-type-count-total villager == all-feudal-age-villagers)
+		(food-amount >= all-feudal-age-villager-minimum-food-left)
+	)
+	;(wood-amount >= all-feudal-age-villager-minimum-food-left)
+	(can-research ri-man-at-arms)
+	=>
+	(research ri-man-at-arms)
+	(chat-local-to-self "Researching MAN-AT-ARMS")
+	;(disable-self)
+)
+
+(defrule
+	;(current-age >= castle-age)
+	(unit-type-count-total militiaman-line >= army-update-technology)
+	(or
+		(unit-type-count-total villager == all-feudal-age-villagers)
+		(food-amount >= all-feudal-age-villager-minimum-food-left)
+	)
+	;(wood-amount >= all-feudal-age-villager-minimum-food-left)
+	(can-research ri-long-swordsman)
+	=>
+	(research ri-long-swordsman)
+	(chat-local-to-self "Researching LONG SWORDSMAN")
+	;(disable-self)
+)
+
+(defrule
+	;(current-age >= imperial-age)
+	(unit-type-count-total militiaman-line >= army-update-technology)
+	(or
+		(unit-type-count-total villager == all-feudal-age-villagers)
+		(food-amount >= all-feudal-age-villager-minimum-food-left)
+	)
+	;(wood-amount >= all-feudal-age-villager-minimum-food-left)
+	(can-research ri-two-handed-swordsman)
+	=>
+	(research ri-two-handed-swordsman)
+	(chat-local-to-self "Researching TWO-HANDED SWORDSMAN")
+	;(disable-self)
+)
+
+(defrule
+	;(current-age >= imperial-age)
+	(unit-type-count-total militiaman-line >= army-update-technology)
+	(or
+		(unit-type-count-total villager == all-feudal-age-villagers)
+		(food-amount >= all-feudal-age-villager-minimum-food-left)
+	)
+	;(wood-amount >= all-feudal-age-villager-minimum-food-left)
+	(can-research ri-champion)
+	=>
+	(research ri-champion)
+	(chat-local-to-self "Researching CHAMPION")
+	;(disable-self)
+)
+
+(defrule
+	;(current-age >= castle-age)
+	(unit-type-count-total spearman-line >= army-update-technology)
+	(or
+		(unit-type-count-total villager == all-feudal-age-villagers)
+		(food-amount >= all-feudal-age-villager-minimum-food-left)
+	)
+	;(wood-amount >= all-feudal-age-villager-minimum-food-left)
+	(can-research ri-pikeman)
+	=>
+	(research ri-pikeman)
+	(chat-local-to-self "Researching PIKEMAN")
+	;(disable-self)
+)
+
+(defrule
+	;(current-age >= imperial-age)
+	(unit-type-count-total spearman-line >= army-update-technology)
+	(or
+		(unit-type-count-total villager == all-feudal-age-villagers)
+		(food-amount >= all-feudal-age-villager-minimum-food-left)
+	)
+	;(wood-amount >= all-feudal-age-villager-minimum-food-left)
+	(can-research ri-halberdier)
+	=>
+	(research ri-halberdier)
+	(chat-local-to-self "Researching HALBERDIER")
+	;(disable-self)
+)
+
+(defrule
+	;(current-age >= castle-age)
+	(unit-type-count-total eagle-warrior-line >= army-update-technology)
+	(or
+		(unit-type-count-total villager == all-feudal-age-villagers)
+		(food-amount >= all-feudal-age-villager-minimum-food-left)
+	)
+	;(wood-amount >= all-feudal-age-villager-minimum-food-left)
+	(can-research ri-eagle-warrior)
+	=>
+	(research ri-eagle-warrior)
+	(chat-local-to-self "Researching EAGLE WARRIOR")
+	;(disable-self)
+)
+
+(defrule
+	;(current-age >= imperial-age)
+	(unit-type-count-total eagle-warrior-line >= army-update-technology)
+	(or
+		(unit-type-count-total villager == all-feudal-age-villagers)
+		(food-amount >= all-feudal-age-villager-minimum-food-left)
+	)
+	;(wood-amount >= all-feudal-age-villager-minimum-food-left)
+	(can-research ri-elite-eagle-warrior)
+	=>
+	(research ri-elite-eagle-warrior)
+	(chat-local-to-self "Researching ELITE EAGLE WARRIOR")
+	;(disable-self)
+)
+
+(defrule
+	(current-age >= castle-age)
+	(or
+		(unit-type-count-total eagle-warrior-line >= army-update-technology)
+		(or
+			(unit-type-count-total spearman-line >= army-update-technology)
+			(unit-type-count-total militiaman-line >= army-update-technology)
+		)
+	)
+	(or
+		(unit-type-count-total villager == all-castle-age-villagers)
+		(food-amount >= all-castle-age-villager-minimum-food-left)
+	)
+	;(wood-amount >= all-castle-age-villager-minimum-food-left)
+	(can-research ri-tracking)
+	=>
+	(research ri-tracking)
+	(chat-local-to-self "Researching TRACKING")
+	;(disable-self)
+)
+
+(defrule
+	(current-age >= castle-age)
+	(or
+		(unit-type-count-total eagle-warrior-line >= army-update-technology)
+		(or
+			(unit-type-count-total spearman-line >= army-update-technology)
+			(unit-type-count-total militiaman-line >= army-update-technology)
+		)
+	)
+	(or
+		(unit-type-count-total villager == all-feudal-age-villagers)
+		(food-amount >= all-feudal-age-villager-minimum-food-left)
+	)
+	;(wood-amount >= all-feudal-age-villager-minimum-food-left)
+	(can-research ri-squires)
+	=>
+	(research ri-squires)
+	(chat-local-to-self "Researching SQUIRES")
+	;(disable-self)
+)
+
+; Arson is not available yet
+;(defrule
+;	;(current-age >= castle-age)
+;	(or
+;		(unit-type-count-total eagle-warrior-line >= army-update-technology)
+;		(or
+;			(unit-type-count-total spearman-line >= army-update-technology)
+;			(unit-type-count-total militiaman-line >= army-update-technology)
+;		)
+;	)
+;	(or
+;		(unit-type-count-total villager == all-feudal-age-villagers)
+;		(food-amount >= all-feudal-age-villager-minimum-food-left)
+;	)
+;	;(wood-amount >= all-feudal-age-villager-minimum-food-left)
+;	(can-research ri-arson)
+;	=>
+;	(research ri-arson)
+;	;(disable-self)
+;)

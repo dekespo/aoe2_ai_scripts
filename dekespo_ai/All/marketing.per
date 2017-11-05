@@ -1,0 +1,74 @@
+; Abundance time
+	(defrule
+		(or
+			(wood-amount > 3000)
+			(food-amount > 3000)
+		)
+		(can-research ri-guilds)
+		=>
+		(research ri-guilds)
+		(chat-local-to-self "Researching GUILDS")
+		;(disable-self)
+	)
+
+	(defrule
+		(wood-amount > 4000)
+		(gold-amount < 5000)
+		(building-type-count-total market > 0)
+		(can-sell-commodity wood)
+		=>
+		(release-escrow wood)
+		(sell-commodity wood)
+	)
+
+	(defrule
+		(food-amount > 4000)
+		(gold-amount < 5000)
+		(building-type-count-total market > 0)
+		(can-sell-commodity food)
+		=>
+		(release-escrow food)
+		(sell-commodity food)
+	)
+
+; Age Advancement marketing after some time
+	(defrule
+		(current-age == feudal-age)
+		(food-amount > 800)
+		(gold-amount < 200)
+		(can-sell-commodity food)
+		=>
+		(release-escrow food)
+		(sell-commodity food)
+	)
+
+	(defrule
+		(current-age == feudal-age)
+		(wood-amount > 500)
+		(gold-amount < 200)
+		(can-sell-commodity wood)
+		=>
+		(release-escrow wood)
+		(sell-commodity wood)
+	)
+
+	(defrule
+		(current-age == castle-age)
+		(food-amount > 1500)
+		(gold-amount < 800)
+		=>
+		(release-escrow food)
+		(sell-commodity food)
+	)
+
+	(defrule
+		(current-age == castle-age)
+		(wood-amount > 1000)
+		(gold-amount < 800)
+		=>
+		(release-escrow wood)
+		(sell-commodity wood)
+	)
+
+; Buy cheap food and wood when main tc collapsed(not finished)
+; Sell extra stone for good price(not finished)

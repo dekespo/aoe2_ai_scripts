@@ -1,0 +1,137 @@
+;(defconst army-number 20)
+;(defconst small-army-number 3)
+;(defconst scout-cavalry-number 0)
+;
+;; Deneme
+;	(defrule
+;		(or
+;			(players-unit-type-count any-enemy villager > 0)
+;			(players-unit-type-count any-enemy scout-cavalry-line > 0)
+;		)
+;		=>
+;		(up-modify-goal scout-cavalry-number c:= 5)
+;;		(up-chat-data-to-self "Scout Cavalry: %d." c: scout-cavalry-number)
+;	)
+;
+;; Big army
+;	(defrule
+;		(players-unit-type-count any-enemy archer-line > army-number)
+;		=>
+;		(chat-local-to-self "Archer exists!")
+;		(up-modify-goal scout-cavalry-number c:= 5)
+;		(up-chat-data-to-self "Scout Cavalry: %d." c: scout-cavalry-number)
+;	)
+;
+;	(defrule
+;		(players-unit-type-count any-enemy skirmisher-line > army-number)
+;		=>
+;		(chat-local-to-self "Skirmisher exists!")
+;		(up-modify-goal scout-cavalry-number c:= 5)
+;		(up-chat-data-to-self "Scout Cavalry: %d." c: scout-cavalry-number)
+;	)
+;
+;	(defrule
+;		(players-unit-type-count any-enemy cavalry-archer-line > army-number)
+;		=>
+;		(chat-local-to-self "Cavalry Archer exists!")
+;	)
+;
+;	(defrule
+;		(players-unit-type-count any-enemy hand-cannoneer > army-number)
+;		=>
+;		(chat-local-to-self "Hand Cannoneer exists!")
+;	)
+;
+;	(defrule
+;		(players-unit-type-count any-enemy militiaman-line > army-number)
+;		=>
+;		(chat-local-to-self "Militiaman exists!")
+;	)
+;
+;	(defrule
+;		(players-unit-type-count any-enemy spearman-line > army-number)
+;		=>
+;		(chat-local-to-self "Spearman exists!")
+;	)
+;
+;	(defrule
+;		(players-unit-type-count any-enemy eagle-warrior-line > army-number)
+;		=>
+;		(chat-local-to-self "Eagle Warrior exists!")
+;	)
+;
+;	(defrule
+;		(players-unit-type-count any-enemy scout-cavalry-line > army-number)
+;		=>
+;		(chat-local-to-self "Scout Cavalry exists!")
+;	)
+;
+;	(defrule
+;		(players-unit-type-count any-enemy knight-line > army-number)
+;		=>
+;		(chat-local-to-self "Knight exists!")
+;	)
+;
+;	(defrule
+;		(players-unit-type-count any-enemy camel-line > army-number)
+;		=>
+;		(chat-local-to-self "Camel exists!")
+;	)
+;
+;; Small Army
+;	(defrule
+;		(players-unit-type-count any-enemy monk > small-army-number)
+;		=>
+;		(chat-local-to-self "At least 3 monks exist!")
+;		(up-modify-goal scout-cavalry-number c:= 5)
+;		(up-chat-data-to-self "Scout Cavalry: %d." c: scout-cavalry-number)
+;	)
+;
+;	(defrule
+;		(players-unit-type-count any-enemy petard > small-army-number)
+;		=>
+;		(chat-local-to-self "At least 3 petards exist!")
+;	)
+;
+;	(defrule
+;		(players-unit-type-count any-enemy trebuchet > small-army-number)
+;		=>
+;		(chat-local-to-self "At least 3 trebuchets exist!")
+;	)
+;
+;	(defrule
+;		(players-unit-type-count any-enemy mangonel-line > small-army-number)
+;		=>
+;		(chat-local-to-self "At least 3 mangonels exist!")
+;	)
+;
+;	(defrule
+;		(players-unit-type-count any-enemy battering-ram-line > small-army-number)
+;		=>
+;		(chat-local-to-self "At least 3 Battering Rams exist!")
+;	)
+;
+;	(defrule
+;		(players-unit-type-count any-enemy scorpion-line > small-army-number)
+;		=>
+;		(chat-local-to-self "At least 3 scorpions exist!")
+;	)
+;
+;	(defrule
+;		(players-unit-type-count any-enemy bombard-cannon > small-army-number)
+;		=>
+;		(chat-local-to-self "At least 3 Bombard Cannon exist!")
+;	)
+;
+;	;(defrule
+;	;	(true)
+;	;	=>
+;	;	(up-chat-data-to-self "Scout Cavalry: %d." c: scout-cavalry-number)
+;	;)
+;
+;	(defrule
+;		(unit-type-count-total scout-cavalry-line < scout-cavalry-number)
+;		(can-train scout-cavalry-line)
+;		=>
+;		(train scout-cavalry-line)
+;	)

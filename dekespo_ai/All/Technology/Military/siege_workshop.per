@@ -1,0 +1,74 @@
+(defrule
+	;(current-age >= imperial-age)
+	(unit-type-count-total battering-ram-line >= army-siege-update-technology)
+	(or
+		(unit-type-count-total villager == all-castle-age-villagers)
+		(food-amount >= all-feudal-age-villager-minimum-food-left)
+	)
+	;(wood-amount >= all-feudal-age-villager-minimum-food-left)
+	(can-research ri-capped-ram)
+	=>
+	(research ri-capped-ram)
+	(chat-local-to-self "Researching CAPPED RAM")
+	;(disable-self)
+)
+
+(defrule
+	;(current-age >= imperial-age)
+	(unit-type-count-total battering-ram-line >= army-siege-update-technology)
+	(or
+		(unit-type-count-total villager == all-castle-age-villagers)
+		(food-amount >= all-feudal-age-villager-minimum-food-left)
+	)
+	;(wood-amount >= all-feudal-age-villager-minimum-food-left)
+	(can-research ri-siege-ram)
+	=>
+	(research ri-siege-ram)
+	(chat-local-to-self "Researching SIEGE RAM")
+	;(disable-self)
+)
+
+(defrule
+	;(current-age >= imperial-age)
+	(unit-type-count-total mangonel-line >= army-siege-update-technology)
+	(or
+		(unit-type-count-total villager == all-castle-age-villagers)
+		(food-amount >= all-feudal-age-villager-minimum-food-left)
+	)
+	;(wood-amount >= all-feudal-age-villager-minimum-food-left)
+	(can-research ri-onager)
+	=>
+	(research ri-onager)
+	(chat-local-to-self "Researching ONAGER")
+	;(disable-self)
+)
+
+(defrule
+	;(current-age >= imperial-age)
+	(unit-type-count-total mangonel-line >= army-siege-update-technology)
+	(or
+		(unit-type-count-total villager == all-feudal-age-villagers)
+		(food-amount >= all-feudal-age-villager-minimum-food-left)
+	)
+	;(wood-amount >= all-feudal-age-villager-minimum-food-left)
+	(can-research ri-siege-onager)
+	=>
+	(research ri-siege-onager)
+	(chat-local-to-self "Researching SIEGE ONAGER")
+	;(disable-self)
+)
+
+(defrule
+	;(current-age >= imperial-age)
+	(unit-type-count-total scorpion-line >= army-siege-update-technology)
+	(or
+		(unit-type-count-total villager == all-feudal-age-villagers)
+		(food-amount >= all-feudal-age-villager-minimum-food-left)
+	)
+	;(wood-amount >= all-feudal-age-villager-minimum-food-left)
+	(can-research ri-heavy-scorpion)
+	=>
+	(research ri-heavy-scorpion)
+	(chat-local-to-self "Researching HEAVY SCORPION")
+	;(disable-self)
+)

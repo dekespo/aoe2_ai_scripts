@@ -1,0 +1,131 @@
+; Increasing Town Size
+	(defrule
+		(goal GOAL-ENABLE-TSA COND-YES)
+		(not (enemy-buildings-in-town))
+		(military-population > 50)
+		(strategic-number sn-maximum-town-size == 124)
+		=>
+		(set-strategic-number sn-maximum-town-size 144)
+		(chat-local-to-self "Current TSA: 144")
+	)
+
+	(defrule
+		(goal GOAL-ENABLE-TSA COND-YES)
+		(not (enemy-buildings-in-town))
+		(military-population > 50)
+		(strategic-number sn-maximum-town-size == 104)
+		=>
+		(set-strategic-number sn-maximum-town-size 124)
+		(chat-local-to-self "Current TSA: 124")
+	)
+
+	(defrule
+		(goal GOAL-ENABLE-TSA COND-YES)
+		(not (enemy-buildings-in-town))
+		(military-population > 50)
+		(strategic-number sn-maximum-town-size == 84)
+		=>
+		(set-strategic-number sn-maximum-town-size 104)
+		(chat-local-to-self "Current TSA: 104")
+	)
+
+	(defrule
+		(goal GOAL-ENABLE-TSA COND-YES)
+		(not (enemy-buildings-in-town))
+		(military-population > 50)
+		(strategic-number sn-maximum-town-size == 64)
+		=>
+		(set-strategic-number sn-maximum-town-size 84)
+		(chat-local-to-self "Current TSA: 84")
+	)
+
+	(defrule
+		(goal GOAL-ENABLE-TSA COND-YES)
+		(not (enemy-buildings-in-town))
+		(military-population > 50)
+		(strategic-number sn-maximum-town-size == 44)
+		=>
+		(set-strategic-number sn-maximum-town-size 64)
+		(chat-local-to-self "Current TSA: 64")
+	)
+
+	(defrule
+		(goal GOAL-ENABLE-TSA COND-YES)
+		(not (enemy-buildings-in-town))
+		(military-population > 50)
+		(strategic-number sn-maximum-town-size == all-imperial-age-tc-distance-max)
+		=>
+		(set-strategic-number sn-maximum-town-size 44)
+		(chat-local-to-self "Current TSA: 44")
+	)
+
+; Decreasing Town Size
+	(defrule
+		(goal GOAL-ENABLE-TSA COND-YES)
+		(enemy-buildings-in-town)
+		(military-population > 50)
+		(strategic-number sn-maximum-town-size == 44)
+		=>
+		(set-strategic-number sn-maximum-town-size all-imperial-age-tc-distance-max)
+		(chat-local-to-self "Current TSA: minimum")
+	)
+
+	(defrule
+		(goal GOAL-ENABLE-TSA COND-YES)
+		(enemy-buildings-in-town)
+		(military-population > 50)
+		(strategic-number sn-maximum-town-size == 64)
+		=>
+		(set-strategic-number sn-maximum-town-size 44)
+		(chat-local-to-self "Current TSA: 44")
+	)
+
+	(defrule
+		(goal GOAL-ENABLE-TSA COND-YES)
+		(enemy-buildings-in-town)
+		(military-population > 50)
+		(strategic-number sn-maximum-town-size == 84)
+		=>
+		(set-strategic-number sn-maximum-town-size 64)
+		(chat-local-to-self "Current TSA: 64")
+	)
+
+	(defrule
+		(goal GOAL-ENABLE-TSA COND-YES)
+		(enemy-buildings-in-town)
+		(military-population > 50)
+		(strategic-number sn-maximum-town-size == 104)
+		=>
+		(set-strategic-number sn-maximum-town-size 84)
+		(chat-local-to-self "Current TSA: 84")
+	)
+
+	(defrule
+		(goal GOAL-ENABLE-TSA COND-YES)
+		(enemy-buildings-in-town)
+		(military-population > 50)
+		(strategic-number sn-maximum-town-size == 124)
+		=>
+		(set-strategic-number sn-maximum-town-size 104)
+		(chat-local-to-self "Current TSA: 104")
+	)
+
+	(defrule
+		(goal GOAL-ENABLE-TSA COND-YES)
+		(military-population > 50)
+		(enemy-buildings-in-town)
+		(strategic-number sn-maximum-town-size == 144)
+		=>
+		(set-strategic-number sn-maximum-town-size 124)
+		(chat-local-to-self "Current TSA: 124")
+	)
+
+; Cannot attack
+	(defrule
+		(goal GOAL-ENABLE-TSA COND-YES)
+		(military-population <= 50)
+		=>
+		(set-goal GOAL-ENABLE-TSA COND-NO)
+		(set-strategic-number sn-maximum-town-size all-imperial-age-tc-distance-max)
+		(chat-local-to-self "Current TSA: minimum and not enough army")
+	)

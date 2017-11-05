@@ -1,0 +1,29 @@
+(defrule
+	(current-age == imperial-age)
+	(unit-type-count-total villager >= all-imperial-age-villagers)
+	(can-research ri-conscription)
+	=>
+	(research ri-conscription)
+	;(disable-self)
+	(chat-local-to-self "Researching CONSCRIPTION")
+)
+
+(defrule
+	(current-age == imperial-age)
+	(unit-type-count-total villager >= all-imperial-age-villagers)
+	(unit-type-count-total knight-line >= 10)
+	(can-research ri-chivalry)
+	=>
+	(research ri-chivalry)
+	(chat-local-to-self "Researching CHIVALRY")
+)
+
+(defrule
+	(current-age == imperial-age)
+	(unit-type-count-total villager >= all-imperial-age-villagers)
+	(unit-type-count-total my-unique-unit-line >= 10)
+	(can-research my-unique-research)
+	=>
+	(research my-unique-research)
+	(chat-local-to-self "Researching MY-UNIQUE-RESEARCH")
+)

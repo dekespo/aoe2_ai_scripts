@@ -1,0 +1,14 @@
+(defrule
+	;(current-age >= imperial-age)
+	(unit-type-count-total my-unique-unit >= army-update-technology)
+	(or
+		(unit-type-count-total villager == all-feudal-age-villagers)
+		(food-amount >= all-feudal-age-villager-minimum-food-left)
+	)
+	;(wood-amount >= all-feudal-age-villager-minimum-food-left)
+	(can-research my-unique-unit-upgrade)
+	=>
+	(research my-unique-unit-upgrade)
+	(chat-local-to-self "Researching MY-UNIQUE-UNIT-UPGRADE")
+	;(disable-self)
+)

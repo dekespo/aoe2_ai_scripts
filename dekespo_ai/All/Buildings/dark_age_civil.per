@@ -1,0 +1,54 @@
+(defrule
+	(current-age == dark-age)
+	(can-build house)
+	(housing-headroom < 4) 
+	(population-headroom > 3) 
+	=>
+	(build house)
+)
+
+(defrule
+	(goal GOAL-FOOD-FOUND COND-YES)
+	(resource-found food) ;for bushes
+	(building-type-count-total mill < 1)
+	(can-build mill)
+	=>
+	(build mill)
+)
+
+(defrule
+	(goal GOAL-WOOD-FOUND COND-YES)
+	(building-type-count-total mill > 0)
+	(building-type-count-total lumber-camp < 1)
+	(food-amount >= all-dark-age-food-amount)
+	(can-build lumber-camp)
+	=>
+	(build lumber-camp)
+)
+
+(defrule
+	(current-age == dark-age)
+	(building-type-count lumber-camp > 0)
+	(wood-amount >= all-dark-age-wood-amount)
+	(unit-type-count female-forager == 0)
+	(unit-type-count male-forager == 0)
+	(or
+		(unit-type-count-total villager > 15)
+		(game-time > 300)
+		;(unit-type-count-total food-gatherer == 0)
+	)
+	(building-type-count-total farm <= 10)
+	(idle-farm-count < 2)
+	=>
+	(build farm)
+	(chat-local-to-self "Building a farm - Dark Age.")
+)
+
+(defrule
+	(unit-type-count villager >= all-dark-age-villagers)
+	(building-type-count-total mining-camp < 1)
+	(resource-found gold)
+	(can-build mining-camp)
+	=>
+	(build mining-camp)
+)

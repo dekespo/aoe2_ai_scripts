@@ -1,0 +1,113 @@
+(defrule
+	(current-age >= castle-age)
+	(can-research ri-ballistics)
+	=>
+	(research ri-ballistics)
+	(chat-local-to-self "Researching BALLISTICS")
+	;(disable-self)
+)
+
+(defrule
+	(current-age >= castle-age)
+	(or
+		(building-type-count-total castle >= 1)
+		(building-type-count-total watch-tower >= 1)
+	)
+	(can-research ri-murder-holes)
+	=>
+	(research ri-murder-holes)
+	(chat-local-to-self "Researching MURDER HOLES")
+	;(disable-self)
+)
+
+(defrule
+	(current-age >= castle-age)
+	(building-type-count-total watch-tower > 1)
+	(research-completed ri-murder-holes)
+	(can-research ri-guard-tower)
+	=>
+	(research ri-guard-tower)
+	(chat-local-to-self "Researching GUARD TOWER")
+)
+
+
+;(defrule
+;	(current-age >= castle-age)
+;	(building-type-count-total watch-tower > 1)
+;	(research-completed ri-guard-tower)
+;	(can-research ri-arrowslits)
+;	=>
+;	(research ri-arrowslits)
+;)
+
+(defrule
+	(current-age == imperial-age)
+	(building-type-count-total watch-tower > 1)
+	(research-completed ri-guard-tower)
+	(can-research ri-keep)
+	=>
+	(research ri-keep)
+	(chat-local-to-self "Researching KEEP")
+)
+
+(defrule
+	(current-age >= castle-age)
+	(building-type-count-total castle >= 2)
+	(unit-type-count-total villager >= all-imperial-age-villagers-enough)
+	(can-research ri-masonry)
+	=>
+	(research ri-masonry)
+	(chat-local-to-self "Researching MASONRY")
+	;(disable-self)
+)
+
+(defrule
+	(current-age >= castle-age)
+	(building-type-count-total castle >= 2)
+	(unit-type-count-total villager >= all-imperial-age-villagers-enough)
+	(can-research ri-architecture)
+	=>
+	(research ri-architecture)
+	(chat-local-to-self "Researching ARCHITECTURE")
+	;(disable-self)
+)
+
+(defrule
+	(current-age == imperial-age)
+	(unit-type-count-total villager >= all-imperial-age-villagers-enough)
+	(can-research ri-chemistry)
+	=>
+	(research ri-chemistry)
+	(chat-local-to-self "Researching CHEMISTRY")
+	;(disable-self)
+)
+
+(defrule
+	(current-age == imperial-age)
+	(unit-type-count-total villager >= all-imperial-age-villagers-enough)
+	(can-research ri-stonecutting) ;treadmill crane
+	=>
+	(research ri-stonecutting)
+	(chat-local-to-self "Researching TREADMILL CRANE")
+	;(disable-self)
+)
+
+(defrule
+	(current-age == imperial-age)
+	(unit-type-count-total villager >= all-imperial-age-villagers-enough)
+	(can-research ri-siege-engineers)
+	=>
+	(research ri-siege-engineers)
+	(chat-local-to-self "Researching SIEGE ENGINEERS")
+	;(disable-self)
+)
+
+(defrule
+	(current-age >= castle-age)
+	(unit-type-count-total villager >= all-imperial-age-villagers)
+	(can-research ri-hoardings)
+	=>
+	(research ri-hoardings)
+	(chat-local-to-self "Researching HOARDINGS")
+	;(disable-self)
+)

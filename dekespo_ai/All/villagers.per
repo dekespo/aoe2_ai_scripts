@@ -1,0 +1,32 @@
+(defrule
+	(current-age == dark-age)
+	(unit-type-count-total villager < all-dark-age-villagers)
+	(can-train villager)
+	=>
+	(train villager)
+)
+
+(defrule
+	(current-age == feudal-age)
+	(unit-type-count-total villager < all-feudal-age-villagers)
+	;(research-completed ri-loom)
+	(can-train villager)
+	=>
+	(train villager)
+)
+
+(defrule
+	(current-age == castle-age)
+	(unit-type-count-total villager < all-castle-age-villagers)
+	(can-train villager)
+	=>
+	(train villager)
+)
+
+(defrule
+	(current-age == imperial-age)
+	(unit-type-count-total villager < all-imperial-age-villagers)
+	(can-train villager)
+	=>
+	(train villager)
+)

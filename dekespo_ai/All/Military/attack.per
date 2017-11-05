@@ -1,0 +1,405 @@
+; RUSH ATTACKS
+;(defrule
+;	(players-civ my-player-number frankish)
+;	(current-age == castle-age)
+;	(not (town-under-attack))
+;	(unit-type-count knight-line >= 8)
+;	(game-time <= 2400)
+;	=>
+;	(set-strategic-number sn-percent-attack-soldiers 100)
+;	(chat-local-to-self "WE ARE ATTACKING (RUSH TIMER-ATTACK FRANKS)")
+;	(attack-now)
+;	(set-strategic-number sn-percent-attack-soldiers 75)
+;	(disable-self)
+;)
+
+; SETTING UP 
+	(defrule
+		(true)
+		=>
+		(set-strategic-number sn-percent-attack-soldiers 75)
+		(enable-timer TIMER-ATTACK 1)
+		(disable-self)
+	)
+
+; TIMER-ATTACK BEFORE 1:30
+	(defrule
+		(players-civ my-player-number aztec)
+		(timer-triggered TIMER-ATTACK)
+		(game-time < 5400)
+		(current-age == imperial-age)
+		(not (town-under-attack))
+		(or
+			(unit-type-count trebuchet >= 2)
+			(unit-type-count battering-ram-line >= 2)
+		)
+		(research-completed ri-elite-eagle-warrior)
+		(research-completed ri-arbalest)
+		(research-completed my-unique-research)
+		=>
+		(attack-now)
+		(set-goal GOAL-ENABLE-TSA COND-YES)
+		(chat-local-to-self "We are attacking! (AZTEC)")
+		(disable-timer TIMER-ATTACK)
+		(enable-timer TIMER-ATTACK PERIOD-ATTACK-READY)
+	)
+
+	(defrule
+		(players-civ my-player-number briton)
+		(timer-triggered TIMER-ATTACK)
+		(game-time < 5400)
+		(current-age == imperial-age)
+		(not (town-under-attack))
+		(or
+			(unit-type-count trebuchet-set >= 2)
+			(unit-type-count battering-ram-line >= 2)
+		)
+		(research-completed ri-halberdier)
+		(research-completed ri-elite-skirmisher)
+		(research-completed ri-elite-longbowman)
+		=>
+		(attack-now)
+		(set-goal GOAL-ENABLE-TSA COND-YES)
+		(chat-local-to-self "We are attacking! (BRITONS)")
+		(disable-timer TIMER-ATTACK)
+		(enable-timer TIMER-ATTACK PERIOD-ATTACK-READY)
+	)
+
+	(defrule
+		(players-civ my-player-number byzantine)
+		(timer-triggered TIMER-ATTACK)
+		(game-time < 5400)
+		(current-age == imperial-age)
+		(not (town-under-attack))
+		(or
+			(unit-type-count trebuchet >= 2)
+			(unit-type-count battering-ram-line >= 2)
+		)
+		(research-completed ri-halberdier)
+		(research-completed ri-elite-cataphract)
+		(research-completed ri-heavy-camel)
+		=>
+		(attack-now)
+		(set-goal GOAL-ENABLE-TSA COND-YES)
+		(chat-local-to-self "We are attacking! (BYZANTINES)")
+		(disable-timer TIMER-ATTACK)
+		(enable-timer TIMER-ATTACK PERIOD-ATTACK-READY)
+	)
+
+	(defrule
+		(players-civ my-player-number celtic)
+		(timer-triggered TIMER-ATTACK)
+		(game-time < 5400)
+		(current-age == imperial-age)
+		(not (town-under-attack))
+		(or
+			(unit-type-count trebuchet >= 2)
+			(unit-type-count battering-ram-line >= 2)
+		)
+		(research-completed ri-elite-woad-raider)
+		(research-completed ri-heavy-scorpion)
+		=>
+		(attack-now)
+		(set-goal GOAL-ENABLE-TSA COND-YES)
+		(chat-local-to-self "We are attacking! (CELTS)")
+		(disable-timer TIMER-ATTACK)
+		(enable-timer TIMER-ATTACK PERIOD-ATTACK-READY)
+	)
+
+	(defrule
+		(players-civ my-player-number chinese)
+		(timer-triggered TIMER-ATTACK)
+		(game-time < 5400)
+		(current-age == imperial-age)
+		(not (town-under-attack))
+		(or
+			(unit-type-count trebuchet >= 2)
+			(unit-type-count battering-ram-line >= 2)
+		)
+		(research-completed ri-halberdier)
+		(research-completed my-unique-research)
+		(research-completed ri-elite-chu-ko-nu)
+		=>
+		(attack-now)
+		(set-goal GOAL-ENABLE-TSA COND-YES)
+		(chat-local-to-self "We are attacking! (CHINESE)")
+		(disable-timer TIMER-ATTACK)
+		(enable-timer TIMER-ATTACK PERIOD-ATTACK-READY)
+	)
+
+	(defrule
+		(players-civ my-player-number frankish)
+		(timer-triggered TIMER-ATTACK)
+		(game-time < 5400)
+		(current-age == imperial-age)
+		(not (town-under-attack))
+		(or
+			(unit-type-count trebuchet >= 2)
+			(unit-type-count battering-ram-line >= 2)
+		)
+		(research-completed ri-cavalier)
+		(research-completed ri-elite-skirmisher)
+		=>
+		(attack-now)
+		(set-goal GOAL-ENABLE-TSA COND-YES)
+		(chat-local-to-self "We are attacking! (FRANKS)")
+		(disable-timer TIMER-ATTACK)
+		(enable-timer TIMER-ATTACK PERIOD-ATTACK-READY)
+	)
+
+	(defrule
+		(players-civ my-player-number gothic)
+		(timer-triggered TIMER-ATTACK)
+		(game-time < 5400)
+		(current-age == imperial-age)
+		(not (town-under-attack))
+		(or
+			(unit-type-count trebuchet >= 2)
+			(unit-type-count battering-ram-line >= 2)
+		)
+		(research-completed ri-halberdier)
+		(research-completed ri-champion)
+		(research-completed ri-elite-huskarl)
+		=>
+		(attack-now)
+		(set-goal GOAL-ENABLE-TSA COND-YES)
+		(chat-local-to-self "We are attacking! (GOTHS)")
+		(disable-timer TIMER-ATTACK)
+		(enable-timer TIMER-ATTACK PERIOD-ATTACK-READY)
+	)
+
+	(defrule
+		(players-civ my-player-number hun)
+		(timer-triggered TIMER-ATTACK)
+		(game-time < 5400)
+		(current-age == imperial-age)
+		(not (town-under-attack))
+		(or
+			(unit-type-count trebuchet >= 2)
+			(unit-type-count battering-ram-line >= 2)
+		)
+		(research-completed ri-cavalier)
+		(research-completed ri-heavy-cavalry-archer)
+		=>
+		(attack-now)
+		(set-goal GOAL-ENABLE-TSA COND-YES)
+		(chat-local-to-self "We are attacking! (HUNS)")
+		(disable-timer TIMER-ATTACK)
+		(enable-timer TIMER-ATTACK PERIOD-ATTACK-READY)
+	)
+
+	(defrule
+		(players-civ my-player-number japanese)
+		(timer-triggered TIMER-ATTACK)
+		(game-time < 5400)
+		(current-age == imperial-age)
+		(not (town-under-attack))
+		(or
+			(unit-type-count trebuchet >= 2)
+			(unit-type-count battering-ram-line >= 2)
+		)
+		(research-completed ri-arbalest)
+		(research-completed ri-elite-samurai)
+		=>
+		(attack-now)
+		(set-goal GOAL-ENABLE-TSA COND-YES)
+		(chat-local-to-self "We are attacking! (JAPANESE)")
+		(disable-timer TIMER-ATTACK)
+		(enable-timer TIMER-ATTACK PERIOD-ATTACK-READY)
+	)
+
+	(defrule
+		(players-civ my-player-number korean)
+		(timer-triggered TIMER-ATTACK)
+		(game-time < 5400)
+		(current-age == imperial-age)
+		(not (town-under-attack))
+		(or
+			(unit-type-count trebuchet >= 2)
+			(unit-type-count battering-ram-line >= 2)
+		)
+		(research-completed ri-champion)
+		(research-completed ri-elite-war-wagon)
+		=>
+		(attack-now)
+		(set-goal GOAL-ENABLE-TSA COND-YES)
+		(chat-local-to-self "We are attacking! (KOREANS)")
+		(disable-timer TIMER-ATTACK)
+		(enable-timer TIMER-ATTACK PERIOD-ATTACK-READY)
+	)
+
+	(defrule
+		(players-civ my-player-number mayan)
+		(timer-triggered TIMER-ATTACK)
+		(game-time < 5400)
+		(current-age == imperial-age)
+		(not (town-under-attack))
+		(or
+			(unit-type-count trebuchet >= 2)
+			(unit-type-count battering-ram-line >= 2)
+		)
+		(research-completed ri-elite-eagle-warrior)
+		(research-completed ri-halberdier)
+		(research-completed my-unique-research)
+		=>
+		(attack-now)
+		(set-goal GOAL-ENABLE-TSA COND-YES)
+		(chat-local-to-self "We are attacking! (MAYAN)")
+		(disable-timer TIMER-ATTACK)
+		(enable-timer TIMER-ATTACK PERIOD-ATTACK-READY)
+	)
+
+	(defrule
+		(players-civ my-player-number mongol)
+		(timer-triggered TIMER-ATTACK)
+		(game-time < 5400)
+		(current-age == imperial-age)
+		(not (town-under-attack))
+		(or
+			(unit-type-count trebuchet >= 2)
+			(unit-type-count battering-ram-line >= 2)
+		)
+		(research-completed ri-hussar)
+		(research-completed ri-heavy-camel)
+		(research-completed ri-elite-mangudai)
+		=>
+		(attack-now)
+		(set-goal GOAL-ENABLE-TSA COND-YES)
+		(chat-local-to-self "We are attacking! (MONGOLS)")
+		(disable-timer TIMER-ATTACK)
+		(enable-timer TIMER-ATTACK PERIOD-ATTACK-READY)
+	)
+
+	(defrule
+		(players-civ my-player-number persian)
+		(timer-triggered TIMER-ATTACK)
+		(game-time < 5400)
+		(current-age == imperial-age)
+		(not (town-under-attack))
+		(or
+			(unit-type-count trebuchet >= 2)
+			(unit-type-count battering-ram-line >= 2)
+		)
+		(research-completed ri-cavalier)
+		(research-completed ri-heavy-camel)
+		(research-completed ri-heavy-cavalry-archer)
+		=>
+		(attack-now)
+		(set-goal GOAL-ENABLE-TSA COND-YES)
+		(chat-local-to-self "We are attacking! (PERSIANS)")
+		(disable-timer TIMER-ATTACK)
+		(enable-timer TIMER-ATTACK PERIOD-ATTACK-READY)
+	)
+
+	(defrule
+		(players-civ my-player-number saracen)
+		(timer-triggered TIMER-ATTACK)
+		(game-time < 5400)
+		(current-age == imperial-age)
+		(not (town-under-attack))
+		(or
+			(unit-type-count trebuchet >= 2)
+			(unit-type-count battering-ram-line >= 2)
+		)
+		(research-completed ri-elite-mameluke)
+		(research-completed ri-heavy-camel)
+		(research-completed ri-heavy-cavalry-archer)
+		=>
+		(attack-now)
+		(set-goal GOAL-ENABLE-TSA COND-YES)
+		(chat-local-to-self "We are attacking! (SARACENS)")
+		(disable-timer TIMER-ATTACK)
+		(enable-timer TIMER-ATTACK PERIOD-ATTACK-READY)
+	)
+
+	(defrule
+		(players-civ my-player-number spanish)
+		(timer-triggered TIMER-ATTACK)
+		(game-time < 5400)
+		(current-age == imperial-age)
+		(not (town-under-attack))
+		(or
+			(unit-type-count trebuchet >= 2)
+			(unit-type-count battering-ram-line >= 2)
+		)
+		(research-completed ri-cavalier)
+		(research-completed ri-elite-conquistador)
+		=>
+		(attack-now)
+		(set-goal GOAL-ENABLE-TSA COND-YES)
+		(chat-local-to-self "We are attacking! (SPANISH)")
+		(disable-timer TIMER-ATTACK)
+		(enable-timer TIMER-ATTACK PERIOD-ATTACK-READY)
+	)
+
+	(defrule
+		(players-civ my-player-number turkish)
+		(timer-triggered TIMER-ATTACK)
+		(game-time < 5400)
+		(current-age == imperial-age)
+		(not (town-under-attack))
+		(or
+			(unit-type-count trebuchet >= 2)
+			(unit-type-count battering-ram-line >= 2)
+		)
+		(research-completed ri-elite-janissary)
+		=>
+		(attack-now)
+		(set-goal GOAL-ENABLE-TSA COND-YES)
+		(chat-local-to-self "We are attacking! (TURKS)")
+		(disable-timer TIMER-ATTACK)
+		(enable-timer TIMER-ATTACK PERIOD-ATTACK-READY)
+	)
+
+	(defrule
+		(players-civ my-player-number teutonic)
+		(timer-triggered TIMER-ATTACK)
+		(game-time < 5400)
+		(current-age == imperial-age)
+		(not (town-under-attack))
+		(or
+			(unit-type-count trebuchet-set >= 2)
+			(unit-type-count battering-ram-line >= 2)
+		)
+		(research-completed ri-elite-teutonic-knight)
+		=>
+		(attack-now)
+		(set-goal GOAL-ENABLE-TSA COND-YES)
+		(chat-local-to-self "We are attacking! (TEUTONS)")
+		(disable-timer TIMER-ATTACK)
+		(enable-timer TIMER-ATTACK PERIOD-ATTACK-READY)
+	)
+
+	(defrule
+		(players-civ my-player-number viking)
+		(timer-triggered TIMER-ATTACK)
+		(game-time < 5400)
+		(current-age == imperial-age)
+		(not (town-under-attack))
+		(or
+			(unit-type-count trebuchet >= 2)
+			(unit-type-count battering-ram-line >= 2)
+		)
+		(research-completed ri-arbalest)
+		(research-completed ri-champion)
+		(research-completed ri-elite-berserk)
+		=>
+		(attack-now)
+		(set-goal GOAL-ENABLE-TSA COND-YES)
+		(chat-local-to-self "We are attacking! (VIKINGS)")
+		(disable-timer TIMER-ATTACK)
+		(enable-timer TIMER-ATTACK PERIOD-ATTACK-READY)
+	)
+
+; TIMER-ATTACK AFTER 1:30
+	(defrule
+		(timer-triggered TIMER-ATTACK)
+		(game-time > 5400)
+		(not (town-under-attack))
+		=>
+		(set-strategic-number sn-percent-attack-soldiers 75)
+		(attack-now)
+		(set-goal GOAL-ENABLE-TSA COND-YES)
+		(disable-timer TIMER-ATTACK)
+		(enable-timer TIMER-ATTACK PERIOD-ATTACK-ANYWAY)
+	)

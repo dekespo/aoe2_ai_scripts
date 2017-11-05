@@ -1,0 +1,49 @@
+; Market Technology for Allies
+
+(defrule
+	(current-age >= feudal-age)
+	(players-population any-ally > 0)
+	;(unit-type-count-total villager >= all-castle-age-villagers-enough)
+	(can-research ri-cartography)
+	=>
+	(research ri-cartography)
+	(chat-local-to-self "Researching CARTOGRAPHY")
+	;(disable-self)
+)
+
+(defrule
+	(players-population any-ally > 20)
+	(current-age == imperial-age)
+	(unit-type-count-total trade-cart > 5)
+	(can-research ri-caravan)
+	=>
+	(research ri-caravan)
+	(chat-local-to-self "Researching CARAVAN")
+	;(disable-self)
+)
+
+(defrule
+	(current-age >= castle-age)
+	(players-population any-ally > 20)
+	(food-amount > 1000)
+	(gold-amount > 500)
+	(building-type-count market > 0)
+	(can-research ri-coinage)
+	=>
+	(research ri-coinage)
+	(chat-local-to-self "Researching COINAGE")
+)
+
+(defrule
+	(current-age == imperial-age)
+	(food-amount > 1000)
+	(gold-amount > 500)
+	(players-population any-ally > 20)
+	(building-type-count market > 0)
+	(can-research ri-banking)
+	=>
+	(research ri-banking)
+	(chat-local-to-self "Researching BANKING")
+)
+
+; Guilds is in the first place in the file "marketing.per"

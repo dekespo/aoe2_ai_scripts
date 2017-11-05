@@ -1,0 +1,87 @@
+(defrule
+	(current-age == imperial-age)
+	(building-type-count-total town-center < 4)
+	(can-build town-center)
+	=>
+	;(set-strategic-number sn-camp-max-distance 15)
+	(build town-center)
+	;(set-strategic-number sn-camp-max-distance all-imperial-age-tc-distance-max)
+)
+
+(defrule
+	(current-age == imperial-age)
+	(can-build house)
+	(housing-headroom < 10) 
+	(population-headroom > 9) 
+	=>
+	(build house)
+)
+
+(defrule
+	(current-age == imperial-age)
+	(or
+		(unit-type-count-total villager > 18)
+		(game-time >= 5400)
+	)
+	(building-type-count-total farm <= 40)
+	(idle-farm-count < 4)
+	=>
+	(build farm)
+)
+
+(defrule
+	(current-age == imperial-age)
+	(unit-type-count-total villager >= all-imperial-age-villagers)
+	(building-type-count-total mining-camp < 5)
+	(or
+		(resource-found stone)
+		(resource-found gold)
+	)
+	(can-build mining-camp)
+	=>
+	(build mining-camp)
+)
+
+(defrule
+	(goal GOAL-FOOD-VS-WOOD WOOD)
+	(current-age == imperial-age)
+	(building-type-count-total lumber-camp < 5)
+	(resource-found wood)
+	(can-build lumber-camp)
+	=>
+	(build lumber-camp)
+)
+
+(defrule
+	(goal GOAL-FOOD-VS-WOOD FOOD)
+	(current-age == imperial-age)
+	(building-type-count-total lumber-camp < 4)
+	(resource-found wood)
+	(can-build lumber-camp)
+	=>
+	(build lumber-camp)
+)
+
+(defrule
+	(current-age == imperial-age)
+	(building-type-count-total lumber-camp < 9)
+	(game-time >= 5400)
+	(resource-found wood)
+	(can-build lumber-camp)
+	=>
+	(build lumber-camp)
+)
+
+(defrule
+	(current-age == imperial-age)
+	(unit-type-count-total villager >= all-imperial-age-villagers)
+	(game-time >= 5400)
+	(building-type-count-total mining-camp < 10)
+	(or
+		(resource-found stone)
+		(resource-found gold)
+	)
+	(can-build mining-camp)
+	=>
+	(build mining-camp)
+)

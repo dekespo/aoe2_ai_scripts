@@ -1,0 +1,26 @@
+(defrule
+	(unit-type-count-total villager >= all-imperial-age-villagers)
+	(building-type-count-total town-center >= 3)
+	(building-type-count-total barracks < IMPERIAL-BARRACKS)
+	(can-build barracks)
+	=>
+	(build barracks)
+)
+
+(defrule
+	(unit-type-count-total villager >= all-imperial-age-villagers)
+	(building-type-count-total town-center >= 3)
+	(building-type-count-total archery-range < IMPERIAL-ARCHERY-RANGES)
+	(can-build archery-range)
+	=>
+	(build archery-range)
+)
+
+(defrule
+	(unit-type-count-total villager >= all-imperial-age-villagers)
+	(building-type-count-total town-center >= 3)
+	(building-type-count-total stable < IMPERIAL-STABLES)
+	(can-build stable)
+	=>
+	(build stable)
+)

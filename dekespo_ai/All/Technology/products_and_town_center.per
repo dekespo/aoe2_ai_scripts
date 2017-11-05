@@ -1,0 +1,164 @@
+(defrule
+	(or
+		(and
+			(current-age == dark-age)
+			(and
+				(food-amount >= all-dark-age-food-amount)
+				(unit-type-count-total villager >= all-dark-age-villagers)
+			)
+		)
+		(current-age >= feudal-age)
+	)
+	(can-research ri-loom)
+	=>
+	(research ri-loom)
+	(chat-local-to-self "Researching LOOM")
+	;(disable-self)
+)
+
+(defrule
+	(current-age >= feudal-age)
+	(can-research ri-horse-collar)
+	(building-type-count-total farm >= 5)
+	=>
+	(research ri-horse-collar)
+	(chat-local-to-self "Researching HORSE COLLAR")
+	;(disable-self)
+)
+
+(defrule
+	(current-age >= feudal-age)
+	(can-research ri-double-bit-axe)
+	=>
+	(research ri-double-bit-axe)
+	(chat-local-to-self "Researching DOUBLE BIT AXE")
+	;(disable-self)
+)
+
+(defrule
+	(current-age >= castle-age)
+	(can-research ri-gold-mining)
+	=>
+	(research ri-gold-mining)
+	(chat-local-to-self "Researching GOLD MINING")
+	;(disable-self)
+)
+
+(defrule
+	(current-age >= castle-age)
+	(building-type-count-total town-center >= 2)
+	(can-research ri-stone-mining)
+	=>
+	(research ri-stone-mining)
+	(chat-local-to-self "Researching STONE MINING")
+	;(disable-self)
+)
+
+(defrule
+	(current-age >= castle-age)
+	(building-type-count-total town-center >= 2)
+	(can-research ri-heavy-plow)
+	=>
+	(research ri-heavy-plow)
+	(chat-local-to-self "Researching HEAVY PLOW")
+	;(disable-self)
+)
+
+(defrule
+	(current-age >= castle-age)
+	(building-type-count-total town-center >= 2)
+	(can-research ri-bow-saw)
+	=>
+	(research ri-bow-saw)
+	(chat-local-to-self "Researching BOW SAW")
+	;(disable-self)
+)
+
+(defrule
+	(current-age >= castle-age)
+	(building-type-count-total town-center >= 2)
+	(can-research ri-gold-shaft-mining)
+	=>
+	(research ri-gold-shaft-mining)
+	(chat-local-to-self "Researching GOLD SHAFT MINING")
+	;(disable-self)
+)
+
+(defrule
+	(current-age >= castle-age)
+	(building-type-count-total town-center >= 2)
+	(can-research ri-stone-shaft-mining)
+	=>
+	(research ri-stone-shaft-mining)
+	(chat-local-to-self "Researching STONE SHAFT MINING")
+	;(disable-self)
+)
+
+(defrule
+	(current-age >= castle-age)
+	(building-type-count-total town-center >= 2)
+	(unit-type-count-total villager >= all-castle-age-villagers-enough)
+	(can-research ri-wheel-barrow)
+	=>
+	(research ri-wheel-barrow)
+	(chat-local-to-self "Researching WHEEL BARROW")
+	;(disable-self)
+)
+
+(defrule
+	(current-age >= castle-age)
+	(building-type-count-total town-center >= 2)
+	(unit-type-count-total villager >= all-castle-age-villagers-enough)
+	(research-completed ri-wheel-barrow)
+	(can-research ri-hand-cart)
+	=>
+	(research ri-hand-cart)
+	(chat-local-to-self "Researching HAND CART")
+	;(disable-self)
+)
+
+(defrule
+	(current-age >= castle-age)
+	(building-type-count-total town-center >= 2)
+	(unit-type-count-total villager >= all-castle-age-villagers-enough)
+	(research-completed ri-hand-cart)
+	(can-research ri-town-watch)
+	=>
+	(research ri-town-watch)
+	(chat-local-to-self "Researching TOWN WATCH")
+	;(disable-self)
+)
+
+(defrule
+	(current-age == imperial-age)
+	(can-research ri-crop-rotation)
+	=>
+	(research ri-crop-rotation)
+	(chat-local-to-self "Researching CROP ROTATION")
+	;(disable-self)
+)
+
+(defrule
+	(current-age == imperial-age)
+	(can-research ri-two-man-saw)
+	=>
+	(research ri-two-man-saw)
+	(chat-local-to-self "Researching TWO MAN SAW")
+	;(disable-self)
+)
+
+(defrule
+	(current-age == imperial-age)
+	(unit-type-count-total villager >= all-imperial-age-villagers)
+	(building-type-count-total town-center >= 2)
+	(or
+		(military-population > 50)
+		(game-time > 3000) 
+	)
+	(can-research ri-town-patrol)
+	=>
+	(research ri-town-patrol)
+	(chat-local-to-self "Researching TOWN PATROL")
+	;(disable-self)
+)
+

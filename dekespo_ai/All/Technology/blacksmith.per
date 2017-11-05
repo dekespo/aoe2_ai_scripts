@@ -1,0 +1,186 @@
+(defrule
+	(or
+		(goal GOAL-BLACKSMITH-CASTLE-SWORD COND-YES)
+		(goal GOAL-BLACKSMITH-IMPERIAL-SWORD COND-YES)
+	)
+	(can-research ri-forging)
+	=>
+	(research ri-forging)
+	(chat-local-to-self "Researching FORGING")
+	;(disable-self)
+)
+
+(defrule
+	(or
+		(goal GOAL-BLACKSMITH-CASTLE-SWORD COND-YES)
+		(goal GOAL-BLACKSMITH-IMPERIAL-SWORD COND-YES)
+	)
+	(unit-type-count-total villager >= all-castle-age-villagers-enough)
+	;(research-completed ri-scale-mail)
+	(can-research ri-iron-casting)
+	=>
+	(research ri-iron-casting)
+	(chat-local-to-self "Researching IRON-CASTING")
+	;(disable-self)
+)
+
+(defrule
+	(goal GOAL-BLACKSMITH-IMPERIAL-SWORD COND-YES)
+	(unit-type-count-total villager >= all-imperial-age-villagers-enough)
+	;(research-completed ri-padded-archer-armor)
+	(can-research ri-blast-furnace)
+	=>
+	(research ri-blast-furnace)
+	(chat-local-to-self "Researching BLAST-FURNACE")
+	;(disable-self)
+)
+
+(defrule
+	(or
+		(goal GOAL-BLACKSMITH-CASTLE-ARROW COND-YES)
+		(goal GOAL-BLACKSMITH-IMPERIAL-ARROW COND-YES)
+	)
+	(can-research ri-fletching)
+	=>
+	(research ri-fletching)
+	(chat-local-to-self "Researching FLETCHING")
+	;(disable-self)
+)
+
+(defrule
+	(or
+		(goal GOAL-BLACKSMITH-CASTLE-ARROW COND-YES)
+		(goal GOAL-BLACKSMITH-IMPERIAL-ARROW COND-YES)
+	)
+	(unit-type-count-total villager >= all-castle-age-villagers-enough)
+	;(research-completed ri-iron-casting)
+	(can-research ri-bodkin-arrow)
+	=>
+	(research ri-bodkin-arrow)
+	(chat-local-to-self "Researching BODKIN ARROW")
+	;(disable-self)
+)
+
+(defrule
+	(goal GOAL-BLACKSMITH-IMPERIAL-ARROW COND-YES)
+	(unit-type-count-total villager >= all-imperial-age-villagers-enough)
+	;(research-completed ri-iron-casting)
+	(can-research ri-bracer)
+	=>
+	(research ri-bracer)
+	(chat-local-to-self "Researching BRACER")
+	;(disable-self)
+)
+
+(defrule
+	(or
+		(goal GOAL-BLACKSMITH-CASTLE-INFANTRY-ARMOR COND-YES)
+		(goal GOAL-BLACKSMITH-IMPERIAL-INFANTRY-ARMOR COND-YES)
+	)
+	;(research-completed ri-forging)
+	(can-research ri-scale-mail)
+	=>
+	(research ri-scale-mail)
+	(chat-local-to-self "Researching SCALE MAIL")
+	;(disable-self)
+)
+
+(defrule
+	(or
+		(goal GOAL-BLACKSMITH-CASTLE-INFANTRY-ARMOR COND-YES)
+		(goal GOAL-BLACKSMITH-IMPERIAL-INFANTRY-ARMOR COND-YES)
+	)
+	(unit-type-count-total villager >= all-castle-age-villagers-enough)
+	;(research-completed ri-bodkin-arrow)
+	(can-research ri-chain-mail)
+	=>
+	(research ri-chain-mail)
+	(chat-local-to-self "Researching CHAIN MAIL")
+	;(disable-self)
+)
+
+(defrule
+	(goal GOAL-BLACKSMITH-IMPERIAL-INFANTRY-ARMOR COND-YES)
+	(unit-type-count-total villager >= all-imperial-age-villagers-enough)
+	;(research-completed ri-bodkin-arrow)
+	(can-research ri-plate-mail)
+	=>
+	(research ri-plate-mail)
+	(chat-local-to-self "Researching PLATE MAIL")
+	;(disable-self)
+)
+
+(defrule
+	(or
+		(goal GOAL-BLACKSMITH-CASTLE-KNIGHT-ARMOR COND-YES)
+		(goal GOAL-BLACKSMITH-IMPERIAL-KNIGHT-ARMOR COND-YES)
+	)
+	(can-research ri-scale-barding)
+	=>
+	(research ri-scale-barding)
+	(chat-local-to-self "Researching SCALE BARDING")
+	;(disable-self)
+)
+
+(defrule
+	(or
+		(goal GOAL-BLACKSMITH-CASTLE-KNIGHT-ARMOR COND-YES)
+		(goal GOAL-BLACKSMITH-IMPERIAL-KNIGHT-ARMOR COND-YES)
+	)
+	(unit-type-count-total villager >= all-castle-age-villagers-enough)
+	;(research-completed ri-scale-barding)
+	(can-research ri-chain-barding)
+	=>
+	(research ri-chain-barding)
+	(chat-local-to-self "Researching CHAIN BARDING")
+	;(disable-self)
+)
+
+(defrule
+	(goal GOAL-BLACKSMITH-IMPERIAL-KNIGHT-ARMOR COND-YES)
+	(unit-type-count-total villager >= all-imperial-age-villagers-enough)
+	;(research-completed ri-chain-barding)
+	(can-research ri-plate-barding)
+	=>
+	(research ri-plate-barding)
+	(chat-local-to-self "Researching PLATE BARDING")
+	;(disable-self)
+)
+
+(defrule
+	(or
+		(goal GOAL-BLACKSMITH-CASTLE-ARCHER-ARMOR COND-YES)
+		(goal GOAL-BLACKSMITH-IMPERIAL-ARCHER-ARMOR COND-YES)
+	)
+	;(research-completed ri-chain-mail)
+	(can-research ri-padded-archer-armor)
+	=>
+	(research ri-padded-archer-armor)
+	(chat-local-to-self "Researching PADDED ARCHER ARMOR")
+	;(disable-self)
+)
+
+(defrule
+	(or
+		(goal GOAL-BLACKSMITH-CASTLE-ARCHER-ARMOR COND-YES)
+		(goal GOAL-BLACKSMITH-IMPERIAL-ARCHER-ARMOR COND-YES)
+	)
+	(unit-type-count-total villager >= all-castle-age-villagers-enough)
+	;(research-completed ri-padded-archer-armor)
+	(can-research ri-leather-archer-armor)
+	=>
+	(research ri-leather-archer-armor)
+	(chat-local-to-self "Researching LEATHER ARCHER ARMOR")
+	;(disable-self)
+)
+
+(defrule
+	(goal GOAL-BLACKSMITH-IMPERIAL-ARCHER-ARMOR COND-YES)
+	(unit-type-count-total villager >= all-imperial-age-villagers-enough)
+	;(research-completed ri-iron-casting)
+	(can-research ri-ring-archer-armor)
+	=>
+	(research ri-ring-archer-armor)
+	(chat-local-to-self "Researching RING ARCHER ARMOR")
+	;(disable-self)
+)

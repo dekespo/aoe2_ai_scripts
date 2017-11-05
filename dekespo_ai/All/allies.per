@@ -1,0 +1,325 @@
+; Trade Carts
+	(defrule
+		(current-age >= castle-age)
+		(building-type-count-total town-center >= all-castle-age-minimum-tc)
+		(players-population any-ally > 20)
+		(players-building-type-count any-ally market > 0)
+		(wood-amount > 300)
+		(unit-type-count-total trade-cart < 5)
+		(can-train trade-cart)
+		=>
+		(train trade-cart)
+		(chat-local-to-self "Building TRADE CART")
+	)
+
+	(defrule
+		(current-age == imperial-age)
+		(building-type-count-total town-center >= all-castle-age-minimum-tc) ;will cause not to work when the main tc collapsed
+		(players-population any-ally > 20)
+		(players-building-type-count any-ally market > 0)
+		(unit-type-count-total battering-ram >= 2)
+		(unit-type-count-total trade-cart < 10)
+		(can-train trade-cart)
+		=>
+		(train trade-cart)
+		(chat-local-to-self "Building TRADE CART")
+	)
+
+; Asked for Resources By Allies
+	(defrule
+		(current-age >= castle-age)
+		(players-population any-ally > 20)
+		(taunt-detected any-ally 3)
+		(food-amount > 2000)
+		(building-type-count market > 0)
+		=>
+		(acknowledge-taunt this-any-ally 3)
+		(tribute-to-player this-any-ally food 400)
+		(chat-to-player-using-id this-any-ally 22077)
+		(chat-local-to-self "big tribute food")
+	)
+
+	(defrule
+		(current-age >= castle-age)
+		(players-population any-ally > 20)
+		(taunt-detected any-ally 4)
+		(wood-amount > 2000)
+		(building-type-count market > 0)
+		=>
+		(acknowledge-taunt this-any-ally 4)
+		(tribute-to-player this-any-ally wood 400)
+		(chat-to-player-using-id this-any-ally 22076)
+		(chat-local-to-self "big tribute wood")
+	)
+
+	(defrule
+		(current-age >= castle-age)
+		(players-population any-ally > 20)
+		(taunt-detected any-ally 5)
+		(gold-amount > 2000)
+		(building-type-count market > 0)
+		=>
+		(acknowledge-taunt this-any-ally 5)
+		(tribute-to-player this-any-ally gold 400)
+		(chat-to-player-using-id this-any-ally 22078)
+		(chat-local-to-self "big tribute gold")
+	)
+
+	(defrule
+		(current-age >= castle-age)
+		(players-population any-ally > 20)
+		(taunt-detected any-ally 6)
+		(stone-amount > 1000)
+		(building-type-count market > 0)
+		=>
+		(acknowledge-taunt this-any-ally 6)
+		(tribute-to-player this-any-ally stone 100)
+		(chat-to-player-using-id this-any-ally 22079)
+		(chat-local-to-self "tribute stone")
+	)
+
+	(defrule
+		(current-age >= castle-age)
+		(players-population any-ally > 20)
+		(taunt-detected any-ally 3)
+		(food-amount > 1000)
+		(building-type-count market > 0)
+		=>
+		(acknowledge-taunt this-any-ally 3)
+		(tribute-to-player this-any-ally food 200)
+		(chat-to-player-using-id this-any-ally 22077)
+		(chat-local-to-self "tribute food")
+	)
+
+	(defrule
+		(current-age >= castle-age)
+		(players-population any-ally > 20)
+		(taunt-detected any-ally 4)
+		(wood-amount > 1000)
+		(building-type-count market > 0)
+		=>
+		(acknowledge-taunt this-any-ally 4)
+		(tribute-to-player this-any-ally wood 200)
+		(chat-to-player-using-id this-any-ally 22076)
+		(chat-local-to-self "tribute wood")
+	)
+
+	(defrule
+		(current-age >= castle-age)
+		(players-population any-ally > 20)
+		(taunt-detected any-ally 5)
+		(gold-amount > 1000)
+		(building-type-count market > 0)
+		=>
+		(acknowledge-taunt this-any-ally 5)
+		(tribute-to-player this-any-ally gold 200)
+		(chat-to-player-using-id this-any-ally 22078)
+		(chat-local-to-self "tribute gold")
+	)
+
+	(defrule
+		(current-age >= castle-age)
+		(players-population any-ally > 20)
+		(taunt-detected any-ally 6)
+		(stone-amount > 1000)
+		(building-type-count market > 0)
+		=>
+		(acknowledge-taunt this-any-ally 6)
+		(tribute-to-player this-any-ally stone 100)
+		(chat-to-player-using-id this-any-ally 22079)
+		(chat-local-to-self "tribute stone")
+	)
+
+	; when there is no market
+	(defrule
+		(or
+			(or
+				(taunt-detected any-ally 3)
+				(taunt-detected any-ally 4)
+			)
+			(or
+				(taunt-detected any-ally 5)
+				(taunt-detected any-ally 6)
+			)
+		)
+		(building-type-count market == 0)
+		=>
+		(chat-to-player-using-id this-any-ally 22164)
+		(acknowledge-taunt this-any-ally 3)
+		(acknowledge-taunt this-any-ally 4)
+		(acknowledge-taunt this-any-ally 5)
+		(acknowledge-taunt this-any-ally 6)
+		(chat-local-to-self "Telling my allies that I don't have a market")
+	)
+
+	; Just pass
+	(defrule
+		(or
+			(or
+				(taunt-detected any-ally 3)
+				(taunt-detected any-ally 4)
+			)
+			(or
+				(taunt-detected any-ally 5)
+				(taunt-detected any-ally 6)
+			)
+		)
+		=>
+		(chat-to-player-using-id this-any-ally "Sorry, but I cannot help you now...")
+		(acknowledge-taunt this-any-ally 3)
+		(acknowledge-taunt this-any-ally 4)
+		(acknowledge-taunt this-any-ally 5)
+		(acknowledge-taunt this-any-ally 6)
+		(chat-local-to-self "I couldn't help my allies this time")
+	)
+
+; Asking for resources from Allies
+	; Setting up
+	(defrule
+		(current-age == castle-age)
+		(players-population any-ally > 0)
+		=>
+		(enable-timer TIMER-ASK-FOOD PERIOD-ALLIES-ASK-FOOD)
+		(enable-timer TIMER-ASK-WOOD PERIOD-ALLIES-ASK-WOOD)
+		(enable-timer TIMER-ASK-GOLD PERIOD-ALLIES-ASK-GOLD)
+		(disable-self)
+	)
+
+	(defrule
+		(current-age >= castle-age)
+		(players-population any-ally > 20)
+		(or
+			(civilian-population < 20)
+			(military-population < 10)
+		)
+		(food-amount < 50)
+		(timer-triggered TIMER-ASK-FOOD)
+		=>
+		(chat-to-allies "3 Food please")
+		(disable-timer TIMER-ASK-FOOD)
+		(enable-timer TIMER-ASK-FOOD PERIOD-ALLIES-ASK-FOOD)
+		(chat-local-to-self "asking for food")
+	)
+
+	(defrule
+		(current-age >= castle-age)
+		(players-population any-ally > 20)
+		(or
+			(civilian-population < 20)
+			(military-population < 10)
+		)
+		(wood-amount < 50)
+		(timer-triggered TIMER-ASK-WOOD)
+		=>
+		(chat-to-allies "4 Wood Please")
+		(disable-timer TIMER-ASK-WOOD)
+		(enable-timer TIMER-ASK-WOOD PERIOD-ALLIES-ASK-WOOD)
+		(chat-local-to-self "asking for wood")
+	)
+
+	(defrule
+		(current-age >= castle-age)
+		(players-population any-ally > 20)
+		(or
+			(civilian-population < 30)
+			(military-population < 20)
+		)
+		(gold-amount < 50)
+		(timer-triggered TIMER-ASK-GOLD)
+		=>
+		(chat-to-allies "5 Gold Please")
+		(disable-timer TIMER-ASK-GOLD)
+		(enable-timer TIMER-ASK-GOLD PERIOD-ALLIES-ASK-GOLD)
+		(chat-local-to-self "asking for gold")
+	)
+
+; Agreeing or not on helping an ally on the call for a war
+	(defrule
+		(taunt-detected any-ally 39)
+		(or
+			(military-population >= 20)
+			(not (town-under-attack))
+		)
+		(goal GOAL-ENABLE-TSA COND-NO)
+		=>
+		(set-strategic-number sn-percent-attack-soldiers 50)
+		(attack-now)
+		(chat-to-player-using-id this-any-ally "I am sending my troops to you now!")
+		(chat-local-to-self "Sending my army to my allies!")
+		(acknowledge-taunt this-any-ally 39)
+	)
+
+	(defrule
+		(taunt-detected any-ally 39)
+		(or
+			(military-population < 20)
+			(town-under-attack)
+		)
+		=>
+		(chat-to-player-using-id this-any-ally "Sorry, but I cannot help you now...")
+		(chat-local-to-self "I couldn't send my army to my allies this time")
+		(acknowledge-taunt this-any-ally 39)
+	)
+
+	(defrule
+		(taunt-detected any-ally 39)
+		(goal GOAL-ENABLE-TSA COND-YES)
+		=>
+		(chat-to-player-using-id this-any-ally "I am already attacking, sire!")
+		(chat-local-to-self "I didn't send my army to my allies because I am already attacking!")
+		(acknowledge-taunt this-any-ally 39)
+	)
+
+; Asking for military help in attack or defense
+	; Setting up
+	; Attack
+	(defrule
+		(goal GOAL-ENABLE-TSA COND-YES)
+		(players-population any-ally > 50)
+		=>
+		(enable-timer TIMER-ATTACK-ALLIES 1) ; Immediately
+	)
+
+	(defrule
+		(goal GOAL-ENABLE-TSA COND-NO)
+		=>
+		(disable-timer TIMER-ATTACK-ALLIES)
+	)
+
+	; Defense
+	(defrule
+		(town-under-attack)
+		(players-population any-ally > 20)
+		(military-population <= 20)
+		=>
+		(enable-timer TIMER-DEFEND-ALLIES 1)
+		;(enable-timer TIMER-DEFEND-ALLIES PERIOD-DEFEND-ALLIES)
+	)
+
+	(defrule
+		(or
+			(not (town-under-attack))
+			(military-population > 20)
+		)
+		=>
+		(disable-timer TIMER-DEFEND-ALLIES)
+	)
+
+	(defrule
+		(timer-triggered TIMER-DEFEND-ALLIES)
+		=>
+		(chat-to-allies "39 Help me, my dear allies for I am under attack!")
+		(disable-timer TIMER-DEFEND-ALLIES)
+		(enable-timer TIMER-DEFEND-ALLIES PERIOD-DEFEND-ALLIES)
+		(chat-local-to-self "Asking for help in defense!")
+	)
+
+	; Attack
+	(defrule
+		(timer-triggered TIMER-ATTACK-ALLIES)
+		=>
+		(chat-to-allies "39 Attack my dear allies for I am attacking!")
+		(disable-timer TIMER-ATTACK-ALLIES)
+		(enable-timer TIMER-ATTACK-ALLIES PERIOD-ATTACK-ALLIES)
+		(chat-local-to-self "Asking for help in attack!")
+	)

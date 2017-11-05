@@ -1,0 +1,64 @@
+(defrule
+	(current-age == feudal-age)
+	(can-build house)
+	(housing-headroom < 6) 
+	(population-headroom > 5) 
+	=>
+	(build house)
+)
+
+(defrule
+	(unit-type-count-total villager > all-dark-age-villagers)
+	(building-type-count-total barracks > 0)
+	;(building-type-count-total archery-range > 0)
+	(building-type-count-total blacksmith < 1)
+	(can-build blacksmith)
+	=>
+	(build blacksmith)
+)
+
+(defrule
+	(unit-type-count-total villager > all-dark-age-villagers)
+	(building-type-count-total barracks > 0)
+	;(building-type-count-total blacksmith > 0)
+	(building-type-count-total market < 1)
+	(can-build market)
+	=>
+	(build market)
+)
+
+(defrule
+	(goal GOAL-FOOD-VS-WOOD WOOD)
+	(current-age == feudal-age)
+	;(unit-type-count-total villager > 18)
+	(building-type-count-total farm <= 12)
+	(wood-amount >= 200)
+	(idle-farm-count < 3)
+	=>
+	(build farm)
+	(chat-local-to-self "Building a farm - Feudal Age.")
+)
+
+(defrule
+	(goal GOAL-FOOD-VS-WOOD FOOD)
+	(current-age == feudal-age)
+	;(unit-type-count-total villager > 18)
+	(building-type-count-total farm <= 15)
+	(wood-amount >= 200)
+	(idle-farm-count < 4)
+	=>
+	(build farm)
+	(chat-local-to-self "Building a farm - Feudal Age.")
+)
+
+(defrule
+	(current-age == feudal-age)
+	(unit-type-count-total villager >= all-feudal-age-villagers)
+	(wood-amount > 200) ; force to build military buildings first
+	(resource-found stone)
+	(building-type-count-total mining-camp < 2)
+	(can-build mining-camp)
+	=>
+	(build mining-camp)
+)
+
