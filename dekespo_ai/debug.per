@@ -1,0 +1,16 @@
+(defrule
+	(true)
+=>
+	(enable-timer TIMER-DEBUG PERIOD-DEBUG)
+	(disable-self)
+)
+
+(defrule
+	(timer-triggered TIMER-DEBUG)
+=>
+	(disable-timer TIMER-DEBUG)
+	(up-chat-data-to-player 1 "sn-maximum-town-size: %d" s: sn-maximum-town-size)
+	(up-chat-data-to-player 1 "sn-camp-max-distance: %d" s: sn-camp-max-distance)
+	(up-chat-data-to-player 1 "sn-mill-max-distance: %d" s: sn-mill-max-distance)
+	(enable-timer TIMER-DEBUG PERIOD-DEBUG)
+)
