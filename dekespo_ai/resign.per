@@ -1,8 +1,8 @@
 ; It may resign in two different conditions
 (defrule
-	(game-time > 9000)
-	=>
-	(chat-to-all "Man, we've been fighting for two and half hours, I'm out of here, you win!")
+	(game-time > 14400)
+=>
+	(chat-to-all "Man, we've been fighting for 4 hours, I'm out of here, you win!")
 	(set-goal GOAL-RESIGN COND-YES)
 	(disable-self)
 )
@@ -12,7 +12,7 @@
 	(soldier-count == 0)
 	(unit-type-count villager == 0)
 	(not (can-build town-center))
-	=>
+=>
 	(chat-to-all "Wow, you destroyed me, congratulations!")
 	(set-goal GOAL-RESIGN COND-YES)
 	(disable-self)
@@ -22,7 +22,7 @@
 (defrule
 	(goal GOAL-RESIGN COND-YES)
 	(players-population any-ally > 0)
-	=>
+=>
 	(release-escrow wood)
 	(release-escrow food)
 	(release-escrow gold)
@@ -37,7 +37,7 @@
 ; Delete all military buildings one at the time
 (defrule
 	(goal GOAL-RESIGN COND-YES)
-	=>
+=>
 	(delete-building watch-tower)
 	(delete-building guard-tower)
 	(delete-building keep)
@@ -53,7 +53,7 @@
 	(building-type-count keep == 0)
 	(building-type-count bombard-tower == 0)
 	(building-type-count castle == 0)
-	=>
+=>
 	(resign)
 	(disable-self)
 )

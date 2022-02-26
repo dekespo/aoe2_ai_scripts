@@ -68,9 +68,9 @@
 
 (defrule
 	(timer-triggered TIMER-ECONOMY-BALANCE)
-	(goal GOAL-FOOD-AMOUNT MEDIUM)
-	(goal GOAL-WOOD-AMOUNT MEDIUM)
-	(goal GOAL-GOLD-AMOUNT MEDIUM)
+    (not(goal GOAL-FOOD-AMOUNT LOW))
+    (not(goal GOAL-WOOD-AMOUNT LOW))
+    (not(goal GOAL-GOLD-AMOUNT LOW))
 =>
 	(set-strategic-number sn-wood-gatherer-percentage 36)
 	(set-strategic-number sn-food-gatherer-percentage 36)
@@ -116,6 +116,37 @@
 	(goal GOAL-WOOD-AMOUNT LOW)
 =>
 	(set-strategic-number sn-wood-gatherer-percentage 50)
+)
+
+(defrule
+	(strategic-number sn-wood-gatherer-percentage > 0)
+	(resource-found wood)
+	(dropsite-min-distance wood > DROP-SITE-MINIMUM-DISTANCE)
+	(can-build lumber-camp)
+	(up-pending-objects c: lumber-camp <= 1)
+=>
+	(build lumber-camp)
+)
+
+(defrule
+	(building-type-count-total mining-camp < 20) ;hacking to stop the AI spamming mining camps
+	(dropsite-min-distance gold > DROP-SITE-MINIMUM-DISTANCE)
+	(resource-found gold)
+	(strategic-number sn-gold-gatherer-percentage > 0)
+	(up-pending-objects c: mining-camp == 0)
+	(can-build mining-camp)
+=>
+	(build mining-camp)
+)
+(defrule
+	(building-type-count-total mining-camp < 20) ;hacking to stop the AI spamming mining camps
+	(dropsite-min-distance stone > DROP-SITE-MINIMUM-DISTANCE)
+	(resource-found stone)
+	(strategic-number sn-stone-gatherer-percentage > 0)
+	(up-pending-objects c: mining-camp == 0)
+	(can-build mining-camp)
+=>
+	(build mining-camp)
 )
 
 ; > MIN 5
@@ -227,39 +258,6 @@
 	(set-strategic-number sn-camp-max-distance 999)
 	(disable-self)
 )
-
-;; > MIN 65
-;(defrule
-;	(game-time > 3900)
-;	=>
-;	(set-strategic-number sn-camp-max-distance 70)
-;	(disable-self)
-;)
-;
-;; > MIN 70
-;(defrule
-;	(game-time > 4200)
-;	=>
-;	(set-strategic-number sn-camp-max-distance 75)
-;	(disable-self)
-;)
-;
-;; > MIN 75
-;(defrule
-;	(game-time > 4500)
-;	=>
-;	(set-strategic-number sn-camp-max-distance 80)
-;	(disable-self)
-;)
-;
-;; > MIN 90 (FINAL: EXPANSION)
-;(defrule
-;	(game-time > 5400)
-;	=>
-;	(set-strategic-number sn-camp-max-distance 100)
-;	(disable-self)
-;)
-;
 
 (defrule
 	(timer-triggered TIMER-ECONOMY-BALANCE)

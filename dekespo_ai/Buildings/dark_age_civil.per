@@ -1,8 +1,8 @@
 (defrule
 	(current-age == dark-age)
 	(can-build house)
-	(housing-headroom < 4) 
-	(population-headroom > 3) 
+	(housing-headroom < 4)
+	(population-headroom > 3)
 	=>
 	(build house)
 )
@@ -14,16 +14,6 @@
 	(can-build mill)
 	=>
 	(build mill)
-)
-
-(defrule
-	(goal GOAL-WOOD-FOUND COND-YES)
-	(building-type-count-total mill > 0)
-	(building-type-count-total lumber-camp < 1)
-	(food-amount >= all-dark-age-food-amount)
-	(can-build lumber-camp)
-	=>
-	(build lumber-camp)
 )
 
 (defrule
@@ -42,13 +32,4 @@
 	=>
 	(build farm)
 	(chat-local-to-self "Building a farm - Dark Age.")
-)
-
-(defrule
-	(unit-type-count villager >= all-dark-age-villagers)
-	(building-type-count-total mining-camp < 1)
-	(resource-found gold)
-	(can-build mining-camp)
-	=>
-	(build mining-camp)
 )

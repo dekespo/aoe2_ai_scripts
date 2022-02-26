@@ -1,8 +1,8 @@
 (defrule
 	(current-age == feudal-age)
 	(can-build house)
-	(housing-headroom < 6) 
-	(population-headroom > 5) 
+	(housing-headroom < 6)
+	(population-headroom > 5)
 	=>
 	(build house)
 )
@@ -51,14 +51,4 @@
 	(chat-local-to-self "Building a farm - Feudal Age.")
 )
 
-(defrule
-	(current-age == feudal-age)
-	(unit-type-count-total villager >= all-feudal-age-villagers)
-	(wood-amount > 200) ; force to build military buildings first
-	(resource-found stone)
-	(building-type-count-total mining-camp < 2)
-	(can-build mining-camp)
-	=>
-	(build mining-camp)
-)
 
