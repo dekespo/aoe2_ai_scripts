@@ -10,7 +10,112 @@
 	(set-strategic-number sn-maximum-fish-boat-drop-distance 8)
 	(set-strategic-number sn-camp-max-distance 10)
 	(set-strategic-number sn-required-forest-tiles 5)
+	(enable-timer TIMER-ECONOMY-BALANCE 1)
 	(disable-self)
+)
+
+; TODO: Add FOOD_VS_WOOD conditions
+(defrule
+	(food-amount < LOW-MEDIUM-THRESHOLD)
+=>
+	(set-goal GOAL-FOOD-AMOUNT LOW)
+)
+(defrule
+	(food-amount >= LOW-MEDIUM-THRESHOLD)
+	(food-amount < MEDIUM-HIGH-THRESHOLD)
+=>
+	(set-goal GOAL-FOOD-AMOUNT MEDIUM)
+)
+(defrule
+	(food-amount >= MEDIUM-HIGH-THRESHOLD)
+=>
+	(set-goal GOAL-FOOD-AMOUNT HIGH)
+)
+
+(defrule
+	(wood-amount < LOW-MEDIUM-THRESHOLD)
+=>
+	(set-goal GOAL-WOOD-AMOUNT LOW)
+)
+(defrule
+	(wood-amount >= LOW-MEDIUM-THRESHOLD)
+	(wood-amount < MEDIUM-HIGH-THRESHOLD)
+=>
+	(set-goal GOAL-WOOD-AMOUNT MEDIUM)
+)
+(defrule
+	(wood-amount >= MEDIUM-HIGH-THRESHOLD)
+=>
+	(set-goal GOAL-WOOD-AMOUNT HIGH)
+)
+
+(defrule
+	(gold-amount < LOW-MEDIUM-THRESHOLD)
+=>
+	(set-goal GOAL-GOLD-AMOUNT LOW)
+)
+(defrule
+	(gold-amount >= LOW-MEDIUM-THRESHOLD)
+	(gold-amount < MEDIUM-HIGH-THRESHOLD)
+=>
+	(set-goal GOAL-GOLD-AMOUNT MEDIUM)
+)
+(defrule
+	(gold-amount >= MEDIUM-HIGH-THRESHOLD)
+=>
+	(set-goal GOAL-GOLD-AMOUNT HIGH)
+)
+
+(defrule
+	(timer-triggered TIMER-ECONOMY-BALANCE)
+	(goal GOAL-FOOD-AMOUNT MEDIUM)
+	(goal GOAL-WOOD-AMOUNT MEDIUM)
+	(goal GOAL-GOLD-AMOUNT MEDIUM)
+=>
+	(set-strategic-number sn-wood-gatherer-percentage 36)
+	(set-strategic-number sn-food-gatherer-percentage 36)
+	(set-strategic-number sn-gold-gatherer-percentage 18)
+	(set-strategic-number sn-stone-gatherer-percentage 10)
+)
+
+(defrule
+	(timer-triggered TIMER-ECONOMY-BALANCE)
+	(goal GOAL-FOOD-AMOUNT MEDIUM)
+	(goal GOAL-WOOD-AMOUNT MEDIUM)
+	(goal GOAL-GOLD-AMOUNT LOW)
+    (current-age == dark-age)
+=>
+	(set-strategic-number sn-wood-gatherer-percentage 50)
+	(set-strategic-number sn-food-gatherer-percentage 50)
+	(set-strategic-number sn-gold-gatherer-percentage 0)
+	(set-strategic-number sn-stone-gatherer-percentage 0)
+)
+
+(defrule
+	(timer-triggered TIMER-ECONOMY-BALANCE)
+	(goal GOAL-FOOD-AMOUNT MEDIUM)
+	(goal GOAL-WOOD-AMOUNT MEDIUM)
+	(goal GOAL-GOLD-AMOUNT LOW)
+    (not(current-age == dark-age))
+=>
+	(set-strategic-number sn-wood-gatherer-percentage 40)
+	(set-strategic-number sn-food-gatherer-percentage 40)
+	(set-strategic-number sn-gold-gatherer-percentage 20)
+	(set-strategic-number sn-stone-gatherer-percentage 0)
+)
+
+(defrule
+	(timer-triggered TIMER-ECONOMY-BALANCE)
+	(goal GOAL-FOOD-AMOUNT LOW)
+=>
+	(set-strategic-number sn-food-gatherer-percentage 50)
+)
+
+(defrule
+	(timer-triggered TIMER-ECONOMY-BALANCE)
+	(goal GOAL-WOOD-AMOUNT LOW)
+=>
+	(set-strategic-number sn-wood-gatherer-percentage 50)
 )
 
 ; > MIN 5
@@ -155,3 +260,10 @@
 ;	(disable-self)
 ;)
 ;
+
+(defrule
+	(timer-triggered TIMER-ECONOMY-BALANCE)
+=>
+	(disable-timer TIMER-ECONOMY-BALANCE)
+	(enable-timer TIMER-ECONOMY-BALANCE PERIOD-ECONOMY-BALANCE)
+)

@@ -1,30 +1,30 @@
 ; DARK AGE
 	; Special search for sheeps or forage (TODO: there is some problem)
-		(defrule
-			(goal GOAL-FOOD-SEARCH COND-YES)
-			=>
-			(set-strategic-number sn-percent-civilian-explorers 100)
-			(set-strategic-number sn-minimum-civilian-explorers 10)
-			(set-strategic-number sn-cap-civilian-explorers 10)
-			(set-strategic-number sn-total-number-explorers 11)
-			(set-strategic-number sn-number-explore-groups 11)
-			(set-strategic-number sn-minimum-explore-group-size 1)
-			(set-strategic-number sn-maximum-explore-group-size 1)
-			;(chat-local-to-self "Looking for sheep or forage")
-			(disable-self)
-		)
+	(defrule
+		(goal GOAL-FOOD-SEARCH COND-YES)
+		=>
+		(set-strategic-number sn-percent-civilian-explorers 100)
+		(set-strategic-number sn-minimum-civilian-explorers 10)
+		(set-strategic-number sn-cap-civilian-explorers 10)
+		(set-strategic-number sn-total-number-explorers 11)
+		(set-strategic-number sn-number-explore-groups 11)
+		(set-strategic-number sn-minimum-explore-group-size 1)
+		(set-strategic-number sn-maximum-explore-group-size 1)
+		(chat-local-to-self "Looking for sheep or forage")
+		(disable-self)
+	)
 
-		(defrule
-			(goal GOAL-FOOD-SEARCH COND-NO)
-			=>
-			(set-strategic-number sn-percent-civilian-explorers 0)
-			(set-strategic-number sn-minimum-civilian-explorers 0)
-			(set-strategic-number sn-cap-civilian-explorers 0)
-			(set-strategic-number sn-total-number-explorers 1)
-			(set-strategic-number sn-number-explore-groups 1)
-			;(chat-local-to-self "Food search is cancelled")
-			(disable-self)
-		)
+	(defrule
+		(goal GOAL-FOOD-SEARCH COND-NO)
+		=>
+		(set-strategic-number sn-percent-civilian-explorers 0)
+		(set-strategic-number sn-minimum-civilian-explorers 0)
+		(set-strategic-number sn-cap-civilian-explorers 0)
+		(set-strategic-number sn-total-number-explorers 1)
+		(set-strategic-number sn-number-explore-groups 1)
+		(chat-local-to-self "Food search is cancelled")
+		(disable-self)
+	)
 
 	; Standart Rules
 	(defrule
@@ -34,38 +34,6 @@
 		(set-strategic-number sn-maximum-town-size all-dark-age-tc-distance-max)
 		(set-strategic-number sn-cap-civilian-builders 2)
 		(disable-self)
-	)
-
-	(defrule
-		(current-age == dark-age)
-		(food-amount < all-dark-age-food-amount)
-		=>
-		(set-strategic-number sn-food-gatherer-percentage 83)
-		(set-strategic-number sn-wood-gatherer-percentage 17)
-		(set-strategic-number sn-gold-gatherer-percentage 0)
-		(set-strategic-number sn-stone-gatherer-percentage 0)
-	)
-
-	(defrule
-		(current-age == dark-age)
-		(food-amount >= all-dark-age-food-amount)
-		(wood-amount < all-dark-age-wood-amount)
-		=>
-		(set-strategic-number sn-food-gatherer-percentage 34)
-		(set-strategic-number sn-wood-gatherer-percentage 66)
-		(set-strategic-number sn-gold-gatherer-percentage 0)
-		(set-strategic-number sn-stone-gatherer-percentage 0)
-	)
-
-	(defrule
-		(current-age == dark-age)
-		(food-amount >= all-dark-age-food-amount)
-		(wood-amount >= all-dark-age-wood-amount)
-		=>
-		(set-strategic-number sn-food-gatherer-percentage 50)
-		(set-strategic-number sn-wood-gatherer-percentage 50)
-		(set-strategic-number sn-gold-gatherer-percentage 0)
-		(set-strategic-number sn-stone-gatherer-percentage 0)
 	)
 
 ; FEUDAL AGE
@@ -81,50 +49,6 @@
 		(disable-self)
 	)
 
-	(defrule
-		(current-age == feudal-age)
-		(food-amount < all-feudal-age-food-amount)
-		(wood-amount >= all-feudal-age-wood-amount)
-		=>
-		(set-strategic-number sn-food-gatherer-percentage 56)
-		(set-strategic-number sn-wood-gatherer-percentage 32)
-		(set-strategic-number sn-gold-gatherer-percentage 12)
-		(set-strategic-number sn-stone-gatherer-percentage 0)
-	)
-
-	(defrule
-		(current-age == feudal-age)
-		(food-amount >= all-feudal-age-food-amount)
-		(wood-amount < all-feudal-age-wood-amount)
-		=>
-		(set-strategic-number sn-food-gatherer-percentage 40)
-		(set-strategic-number sn-wood-gatherer-percentage 48)
-		(set-strategic-number sn-gold-gatherer-percentage 12)
-		(set-strategic-number sn-stone-gatherer-percentage 0)
-	)
-
-	(defrule
-		(current-age == feudal-age)
-		(food-amount >= all-feudal-age-food-amount)
-		(wood-amount >= all-feudal-age-wood-amount)
-		=>
-		(set-strategic-number sn-food-gatherer-percentage 40)
-		(set-strategic-number sn-wood-gatherer-percentage 40)
-		(set-strategic-number sn-gold-gatherer-percentage 20)
-		(set-strategic-number sn-stone-gatherer-percentage 0)
-	)
-
-	(defrule
-		(current-age == feudal-age)
-		(food-amount < all-feudal-age-food-amount)
-		(wood-amount < all-feudal-age-wood-amount)
-		=>
-		(set-strategic-number sn-food-gatherer-percentage 50)
-		(set-strategic-number sn-wood-gatherer-percentage 50)
-		(set-strategic-number sn-gold-gatherer-percentage 0)
-		(set-strategic-number sn-stone-gatherer-percentage 0)
-	)
-
 ;CASTLE AGE
 	(defrule
 		(current-age == castle-age)
@@ -136,63 +60,6 @@
 		(set-strategic-number sn-minimum-town-size all-castle-age-tc-distance-min)
 		(set-strategic-number sn-maximum-town-size all-castle-age-tc-distance-max)
 		(disable-self)
-	)
-
-	(defrule
-		(current-age == castle-age)
-		(food-amount < all-castle-age-food-amount)
-		(wood-amount >= all-castle-age-wood-amount)
-		=>
-		(set-strategic-number sn-food-gatherer-percentage 48)
-		(set-strategic-number sn-wood-gatherer-percentage 56)
-		(set-strategic-number sn-gold-gatherer-percentage 12)
-		(set-strategic-number sn-stone-gatherer-percentage 8)
-	)
-
-	(defrule
-		(current-age == castle-age)
-		(food-amount >= all-castle-age-food-amount)
-		(wood-amount < all-castle-age-wood-amount)
-		=>
-		(set-strategic-number sn-food-gatherer-percentage 40)
-		(set-strategic-number sn-wood-gatherer-percentage 48)
-		(set-strategic-number sn-gold-gatherer-percentage 12)
-		(set-strategic-number sn-stone-gatherer-percentage 8)
-	)
-
-	(defrule
-		(current-age == castle-age)
-		(food-amount < all-castle-age-food-amount)
-		(wood-amount < all-castle-age-wood-amount)
-		=>
-		(set-strategic-number sn-food-gatherer-percentage 40)
-		(set-strategic-number sn-wood-gatherer-percentage 40)
-		(set-strategic-number sn-gold-gatherer-percentage 12)
-		(set-strategic-number sn-stone-gatherer-percentage 8)
-	)
-
-	(defrule
-		(goal GOAL-FOOD-VS-WOOD WOOD)
-		(current-age == castle-age)
-		(food-amount >= all-castle-age-food-amount)
-		(wood-amount >= all-castle-age-wood-amount)
-		=>
-		(set-strategic-number sn-food-gatherer-percentage 33)
-		(set-strategic-number sn-wood-gatherer-percentage 34)
-		(set-strategic-number sn-gold-gatherer-percentage 19)
-		(set-strategic-number sn-stone-gatherer-percentage 14)
-	)
-
-	(defrule
-		(goal GOAL-FOOD-VS-WOOD FOOD)
-		(current-age == castle-age)
-		(food-amount >= all-castle-age-food-amount)
-		(wood-amount >= all-castle-age-wood-amount)
-		=>
-		(set-strategic-number sn-food-gatherer-percentage 38)
-		(set-strategic-number sn-wood-gatherer-percentage 29)
-		(set-strategic-number sn-gold-gatherer-percentage 19)
-		(set-strategic-number sn-stone-gatherer-percentage 14)
 	)
 
 ;IMPERIAL AGE
@@ -210,32 +77,10 @@
 		(disable-self)
 	)
 
-	(defrule
-		(goal GOAL-FOOD-VS-WOOD WOOD)
-		(current-age == imperial-age)
-		=>
-		(set-strategic-number sn-food-gatherer-percentage 33)
-		(set-strategic-number sn-wood-gatherer-percentage 34)
-		(set-strategic-number sn-gold-gatherer-percentage 22)
-		(set-strategic-number sn-stone-gatherer-percentage 11)
-		(disable-self)
-	)
-
-	(defrule
-		(goal GOAL-FOOD-VS-WOOD FOOD)
-		(current-age == imperial-age)
-		=>
-		(set-strategic-number sn-food-gatherer-percentage 37)
-		(set-strategic-number sn-wood-gatherer-percentage 30)
-		(set-strategic-number sn-gold-gatherer-percentage 22)
-		(set-strategic-number sn-stone-gatherer-percentage 11)
-		(disable-self)
-	)
-
 ; Boar Hunting- Not depending on ages
 	(defrule
 		(goal GOAL-ENABLE-BOAR-HUNTING COND-YES)
-		=>	
+		=>
 		(set-strategic-number sn-enable-boar-hunting 2)
 		(set-strategic-number sn-maximum-hunt-drop-distance boar-maximum-lure-distance)
 		(set-strategic-number sn-minimum-boar-lure-group-size boar-lure-group-size)
@@ -249,14 +94,14 @@
 		(dropsite-min-distance live-boar < boar-kill-distance)
 		(strategic-number sn-enable-boar-hunting == 2)
 		(strategic-number sn-minimum-boar-hunt-group-size == 0)
-		=>	
+		=>
 		(set-strategic-number sn-minimum-boar-lure-group-size 0)
 		(set-strategic-number sn-minimum-boar-hunt-group-size boar-kill-group-size)
 		(set-strategic-number sn-minimum-number-hunters boar-kill-group-size)
 		(chat-local-to-self "Killing the boar.")
 	)
 
-; Deer Hunting 
+; Deer Hunting
 	; For once: building a mill near to the deers
 	(defrule
 		(goal GOAL-ENABLE-DEER-HUNTING COND-YES)
@@ -280,7 +125,7 @@
 		;(not (resource-found food))
 		;(up-pending-objects c: mill < 1)
 		(goal GOAL-ENABLE-DEER-HUNTING COND-YES)
-		=>				
+		=>
 		(set-strategic-number sn-minimum-number-hunters deer-hunter-count)
 		(set-strategic-number sn-maximum-hunt-drop-distance deer-max-dropoff-distance)
 		(chat-local-to-self "Hunting deers.")
